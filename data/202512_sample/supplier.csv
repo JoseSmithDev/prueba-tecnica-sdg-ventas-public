@@ -1,0 +1,16 @@
+s_suppkey,s_name,s_address,s_nationkey,s_phone,s_acctbal,s_comment
+1,Supplier#000000001,746 Assembly Park,1,40-901-203-2533,9372.29,Iberia Metals with focus on repeat industrial orders and predictable lead times.
+2,Supplier#000000002,641 Trade Center,3,41-215-543-4251,4269.94,Rhine Components with focus on repeat industrial orders and predictable lead times.
+3,Supplier#000000003,678 Foundry Park,5,41-925-653-2509,9013.64,Gaul Industrial with focus on repeat industrial orders and predictable lead times.
+4,Supplier#000000004,758 Trade Center,7,42-198-533-8517,17559.08,Pacific Sourcing with focus on repeat industrial orders and predictable lead times.
+5,Supplier#000000005,78 Dry Port,9,43-478-535-8098,6945.73,Andes Supply with focus on repeat industrial orders and predictable lead times.
+6,Supplier#000000006,784 Export Zone,1,40-370-143-4374,13125.50,Amazonia Trade with focus on repeat industrial orders and predictable lead times.
+7,Supplier#000000007,592 Trade Center,3,41-501-593-4526,7454.16,Shenzhen Precision with focus on repeat industrial orders and predictable lead times.
+8,Supplier#000000008,300 Foundry Park,5,41-854-594-9690,12807.32,Bharat Industrial with focus on repeat industrial orders and predictable lead times.
+9,Supplier#000000009,833 Assembly Park,7,42-731-103-6177,11633.56,Atlas Maghreb with focus on repeat industrial orders and predictable lead times.
+10,Supplier#000000010,676 Trade Center,9,43-210-262-5286,2810.76,Nile Components with focus on repeat industrial orders and predictable lead times.
+11,Supplier#000000011,731 Export Zone,1,40-809-413-6127,17517.86,Mediterranean Parts with focus on repeat industrial orders and predictable lead times.
+12,Supplier#000000012,465 Foundry Park,3,41-636-271-5113,9863.50,Continental Fasteners with focus on repeat industrial orders and predictable lead times.
+13,Supplier#000000013,813 Factory Rd,5,41-542-672-9274,4573.17,Vertex Cables with focus on repeat industrial orders and predictable lead times.
+14,Supplier#000000014,783 Export Zone,7,42-849-940-5686,5554.72,Northshore Pumps with focus on repeat industrial orders and predictable lead times.
+15,Supplier#000000015,420 Dry Port,9,43-844-365-8693,9028.36,Harbor Electrics with focus on repeat industrial orders and predictable lead times.

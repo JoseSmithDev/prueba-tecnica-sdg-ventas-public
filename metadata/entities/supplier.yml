@@ -1,0 +1,28 @@
+entity: supplier
+enabled: true
+source:
+  pattern: "{source_root}/supplier.csv"
+target:
+  database: BRONZE
+  schema: LANDING
+  table: TB_SUPPLIER
+  load_type: full
+columns:
+  - {name: s_suppkey,  type: NUMBER}
+  - {name: s_name,     type: STRING}
+  - {name: s_address,  type: STRING}
+  - {name: s_nationkey, type: NUMBER}
+  - {name: s_phone,    type: STRING}
+  - {name: s_acctbal,  type: "NUMBER(12,2)"}
+  - {name: s_comment,  type: STRING}
+data_vault:
+  hub: hub_supplier
+  business_key: [s_suppkey]
+  hashdiff_exclude: []
+  links:
+    - name: lnk_supplier_nation
+      columns: [s_suppkey, s_nationkey]
+orchestration:
+  dag_group: ventas_monthly
+  depends_on: [nation]
+  ingest_priority: 30

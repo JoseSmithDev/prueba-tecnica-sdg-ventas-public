@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arquitectura de referencia Azure — Resumen ejecutivo</title>
+<style>
+  :root {
+    --ink: #1a2332;
+    --muted: #5a6a7e;
+    --line: #d8dee7;
+    --bg: #f6f8fb;
+    --card: #ffffff;
+    --bronze: #b07d3f;
+    --silver: #7a8794;
+    --gold: #c9a227;
+    --meta: #6b5ea8;
+    --azure: #0078d4;
+    --accent: #0f4c81;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.5;
+    padding: 40px 24px 64px;
+  }
+  .page { max-width: 1080px; margin: 0 auto; }
+
+  header { margin-bottom: 28px; }
+  .kicker {
+    text-transform: uppercase; letter-spacing: 2px; font-size: 12px;
+    color: var(--azure); font-weight: 600; margin-bottom: 6px;
+  }
+  h1 { font-size: 30px; font-weight: 700; margin-bottom: 8px; }
+  .thesis {
+    font-size: 16px; color: var(--muted); max-width: 760px;
+  }
+  .thesis strong { color: var(--ink); }
+
+  h2 {
+    font-size: 15px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--accent); margin: 0 0 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+  section { margin-top: 34px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 20px 22px;
+  }
+
+  /* ---------- diagrama de flujo ---------- */
+  .flow {
+    display: flex; align-items: stretch; gap: 0; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .node {
+    border-radius: 10px; padding: 14px 16px; min-width: 128px;
+    text-align: center; border: 2px solid var(--line); background: var(--card);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .node .name { font-weight: 700; font-size: 14px; }
+  .node .desc { font-size: 11.5px; color: var(--muted); margin-top: 3px; }
+  .node.adls    { border-color: var(--azure);  }
+  .node.bronze  { border-color: var(--bronze); background: #faf3ea; }
+  .node.silver  { border-color: var(--silver); background: #f2f4f6; }
+  .node.gold    { border-color: var(--gold);   background: #fbf6e3; }
+  .node.bi      { border-color: var(--azure);  }
+  .arrow {
+    display: flex; align-items: center; padding: 0 8px;
+    color: var(--muted); font-size: 20px; font-weight: 700;
+  }
+  .underflow {
+    margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+  }
+  .chip {
+    font-size: 12.5px; padding: 6px 14px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--card); color: var(--muted);
+  }
+  .chip b { color: var(--ink); }
+
+  /* ---------- tablas ---------- */
+  .tablewrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th {
+    font-size: 11.5px; text-transform: uppercase; letter-spacing: 1px;
+    color: var(--muted); font-weight: 600;
+  }
+  tr:last-child td { border-bottom: none; }
+  td code, li code, p code {
+    font-family: Consolas, "Courier New", monospace; font-size: 12.5px;
+    background: #eef1f6; border-radius: 4px; padding: 1px 5px;
+  }
+  .arrowcell { color: var(--azure); font-weight: 700; white-space: nowrap; }
+
+  /* ---------- grid de dos columnas ---------- */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 800px) { .grid2 { grid-template-columns: 1fr; } }
+
+  .card h3 { font-size: 15px; margin-bottom: 10px; }
+  .card ul { padding-left: 18px; }
+  .card li { margin-bottom: 7px; font-size: 13.5px; }
+  .card li:last-child { margin-bottom: 0; }
+  .why {
+    margin-top: 12px; padding: 10px 14px; border-left: 3px solid var(--accent);
+    background: #eef3f8; border-radius: 0 8px 8px 0;
+    font-size: 13px; color: var(--muted);
+  }
+  .why b { color: var(--ink); }
+
+  /* ---------- roles ---------- */
+  .role { display: flex; gap: 12px; align-items: baseline; margin-bottom: 9px; font-size: 13.5px; }
+  .role:last-child { margin-bottom: 0; }
+  .rolename {
+    font-family: Consolas, monospace; font-size: 12px; font-weight: 700;
+    color: var(--accent); white-space: nowrap;
+  }
+
+  /* ---------- CI/CD ---------- */
+  .cicd { display: flex; gap: 0; flex-wrap: wrap; align-items: stretch; }
+  .step {
+    flex: 1; min-width: 200px; padding: 14px 16px; border: 1px solid var(--line);
+    background: var(--card); border-radius: 10px;
+  }
+  .step .n {
+    display: inline-block; width: 22px; height: 22px; border-radius: 50%;
+    background: var(--accent); color: #fff; text-align: center; line-height: 22px;
+    font-size: 12px; font-weight: 700; margin-bottom: 8px;
+  }
+  .step .t { font-weight: 700; font-size: 13.5px; margin-bottom: 4px; }
+  .step p { font-size: 12.5px; color: var(--muted); }
+
+  .punchline {
+    margin-top: 16px; text-align: center; font-size: 15px;
+    background: var(--accent); color: #fff; border-radius: 10px; padding: 12px 18px;
+  }
+
+  footer {
+    margin-top: 36px; font-size: 12.5px; color: var(--muted);
+    border-top: 1px solid var(--line); padding-top: 14px;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .card, .step, .node, .chip { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div class="kicker">Prueba técnica SDG · Propuesta de industrialización</div>
+  <h1>Arquitectura de referencia en Azure</h1>
+  <p class="thesis">Principio rector: <strong>cada pieza local tiene un equivalente productivo directo</strong>.
+  La lógica del pipeline (metadata, loader, dbt, DAGs) no cambia — solo cambia dónde viven
+  los ficheros, las credenciales y el runtime.</p>
+</header>
+
+<!-- ============ FLUJO ============ -->
+<section>
+  <h2>Flujo end-to-end</h2>
+  <div class="card">
+    <div class="flow">
+      <div class="node adls"><span class="name">ADLS Gen2</span><span class="desc">CSV mensuales<br>landing/{load_id}/</span></div>
+      <div class="arrow">→</div>
+      <div class="node bronze"><span class="name">BRONZE</span><span class="desc">copia cruda 1:1<br>external stage + COPY</span></div>
+      <div class="arrow">→</div>
+      <div class="node silver"><span class="name">SILVER</span><span class="desc">Data Vault 2.0<br>historia insert-only</span></div>
+      <div class="arrow">→</div>
+      <div class="node gold"><span class="name">GOLD</span><span class="desc">mart Kimball<br>hechos + dimensiones</span></div>
+      <div class="arrow">→</div>
+      <div class="node bi"><span class="name">Power BI</span><span class="desc">consumo analítico</span></div>
+    </div>
+    <div class="underflow">
+      <span class="chip"><b>Airflow gestionado</b> orquesta todo — DAGs generados desde metadata</span>
+      <span class="chip"><b>dbt en contenedor</b> ejecuta las transformaciones dentro de Snowflake</span>
+      <span class="chip"><b>Key Vault</b> custodia las credenciales</span>
+      <span class="chip"><b>META.CONTROL</b> audita cada carga</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAPEO ============ -->
+<section>
+  <h2>Servicios: de lo construido a lo productivo</h2>
+  <div class="card tablewrap">
+    <table>
+      <tr><th>Función</th><th>Hoy (demo local)</th><th></th><th>En Azure</th></tr>
+      <tr><td>Ficheros</td><td>carpeta <code>data/</code></td><td class="arrowcell">→</td><td><b>ADLS Gen2</b> (data lake)</td></tr>
+      <tr><td>Entrada a Snowflake</td><td>stage interno + <code>PUT</code></td><td class="arrowcell">→</td><td><b>External stage + storage integration</b> (sin copiar ficheros, sin contraseñas)</td></tr>
+      <tr><td>Orquestación</td><td>Astro CLI + Docker</td><td class="arrowcell">→</td><td><b>Airflow gestionado</b> — los DAGs se despliegan tal cual</td></tr>
+      <tr><td>Credenciales</td><td>fichero <code>.env</code></td><td class="arrowcell">→</td><td><b>Azure Key Vault</b> (auditoría y rotación)</td></tr>
+      <tr><td>Transformación</td><td>dbt en venv</td><td class="arrowcell">→</td><td><b>dbt en contenedor</b> dentro del pipeline (mismo patrón)</td></tr>
+      <tr><td>CI/CD</td><td>scripts a mano</td><td class="arrowcell">→</td><td><b>GitHub Actions</b></td></tr>
+      <tr><td>Consumo</td><td>query en Snowsight</td><td class="arrowcell">→</td><td><b>Power BI</b> sobre <code>GOLD.MART</code></td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ SNOWFLAKE ============ -->
+<section>
+  <h2>Diseño Snowflake</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>4 bases de datos — una por capa</h3>
+      <ul>
+        <li><b>BRONZE</b> · <code>LANDING</code> — aterrizaje crudo + columnas técnicas de auditoría.</li>
+        <li><b>SILVER</b> · <code>STAGING</code> + <code>VAULT</code> — Data Vault 2.0: el sistema de registro.</li>
+        <li><b>GOLD</b> · <code>MART</code> — estrella Kimball, la verdad de consumo.</li>
+        <li><b>META</b> · <code>CONTROL</code> — control-plane transversal (auditoría de cargas).</li>
+      </ul>
+      <div class="why"><b>Por qué a nivel de base de datos y no de esquema:</b> <code>GRANT ON DATABASE</code>
+      es la frontera de aislamiento más simple de razonar y la más difícil de traspasar por error.
+      En producción: sufijo de entorno (<code>_DEV</code>/<code>_PROD</code>).</div>
+    </div>
+    <div class="card">
+      <h3>3 roles funcionales · 3 warehouses XS</h3>
+      <div class="role"><span class="rolename">LOADER_FR</span><span>escribe BRONZE · inserta auditoría en META · usa <code>WH_INGEST</code></span></div>
+      <div class="role"><span class="rolename">TRANSFORMER_FR</span><span>lee BRONZE · escribe SILVER y GOLD · lee META · usa <code>WH_DBT</code></span></div>
+      <div class="role"><span class="rolename">ANALYST_FR</span><span>solo lee GOLD — no ve el resto · usa <code>WH_BI</code></span></div>
+      <div class="why"><b>Por qué separar warehouses:</b> una transformación pesada nunca frena a BI,
+      y cada uno escala según su demanda real (escalar = un <code>ALTER</code>, no una migración).
+      Auto-suspend a 60&nbsp;s: no se paga lo que no se usa.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INGESTA + METADATA ============ -->
+<section>
+  <h2>Ingesta y orquestación metadata-driven</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>Ingesta idempotente</h3>
+      <ul>
+        <li><code>COPY INTO</code> desde el external stage con <code>FORCE=TRUE</code>, precedido de <code>TRUNCATE</code> (full) o <code>DELETE</code> por <code>load_id</code> (append).</li>
+        <li>Relanzar una carga <b>no duplica datos</b> — verificado end-to-end.</li>
+        <li>Cada fichero deja su fila de auditoría en <code>META.CONTROL</code>.</li>
+        <li>Cadencia mensual → no se necesita Snowpipe; si fuera continua, solo cambia el disparador, no el contrato.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Los DAGs no se escriben: se generan</h3>
+      <ul>
+        <li>Un único <code>dag_factory.py</code> lee los YAML de <code>metadata/</code> y produce el DAG completo: ingesta → capas dbt → verificación.</li>
+        <li>Todo se parametriza con <b>una sola variable</b>: <code>load_id</code>. Mes nuevo = mismo DAG, otro parámetro.</li>
+        <li>Entidad nueva = <b>añadir un YAML</b>, cero código.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DBT ============ -->
+<section>
+  <h2>El papel de dbt</h2>
+  <div class="card">
+    <ul>
+      <li><b>Todo el ciclo de transformación ocurre dentro de Snowflake</b> (ELT): raw → staging (hashes) → Data Vault (hubs/links/satélites incrementales, insert-only) → mart dimensional.</li>
+      <li>Las macros de <code>automate_dv</code> generan el SQL de cada tabla del vault a partir de la metadata — cero SQL a mano por tabla.</li>
+      <li>Sus tests (<code>unique</code>, <code>not_null</code>, relaciones) son la barrera de calidad: <code>dbt build</code> construye y valida en orden de dependencias, y <b>para si algo falla</b>.</li>
+      <li>Integración: Airflow (Cosmos) traduce cada modelo dbt a una tarea nativa del DAG — reintentos y logs por modelo; credenciales desde Key Vault; escribe con el rol <code>TRANSFORMER</code>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ CICD ============ -->
+<section>
+  <h2>CI/CD</h2>
+  <div class="cicd" style="gap:12px;">
+    <div class="step">
+      <span class="n">1</span>
+      <div class="t">Pull request</div>
+      <p>Lint SQL/Python · YAMLs de metadata validados contra su JSON Schema · <code>pytest</code> · <code>dbt build</code> con tests en entorno de pruebas.</p>
+    </div>
+    <div class="step">
+      <span class="n">2</span>
+      <div class="t">Merge a main</div>
+      <p>Despliegue automático de DAGs + metadata al Airflow gestionado · <code>dbt build</code> en producción.</p>
+    </div>
+    <div class="step">
+      <span class="n">3</span>
+      <div class="t">Infraestructura</div>
+      <p>El setup de Snowflake versionado en el repo y aplicado por pipeline (siguiente paso: schemachange).</p>
+    </div>
+  </div>
+  <div class="punchline">Consecuencia de que todo sea metadata-driven: <b>desplegar un pipeline nuevo = mergear un YAML</b></div>
+</section>
+
+<footer>
+  <b>Fuera de alcance a propósito</b> (decisiones, no carencias): Snowpipe (cadencia mensual, no continua) ·
+  row access policies / enmascaramiento PII (TPC-H no contiene dato sensible real) · alerting a Teams/Slack.
+  Cada una tiene un punto de enganche claro: evento ADLS, políticas sobre GOLD, callbacks de Airflow.
+</footer>
+
+</div>
+</body>
+</html>

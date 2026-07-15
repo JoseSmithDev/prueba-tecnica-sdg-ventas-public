@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ventas-dv.local/metadata/entity.schema.json",
+  "title": "Entity metadata contract",
+  "description": "Contrato metadata-driven para una entidad de ingesta. Un fichero de este esquema, en metadata/entities/<entidad>.yml, basta para que loader.py y dag_factory.py sepan qué hacer con esa entidad sin ningún cambio de código.",
+  "type": "object",
+  "required": ["entity", "enabled", "source", "target", "columns", "data_vault", "orchestration"],
+  "additionalProperties": false,
+  "properties": {
+    "entity": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "Nombre lógico de la entidad, en minúsculas (customer, orders, lineitem...)."
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Si es false, dag_factory.py no genera ninguna tarea para esta entidad."
+    },
+    "source": {
+      "type": "object",
+      "required": ["pattern"],
+      "additionalProperties": false,
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "Ruta del CSV relativa a la raíz del repo. Admite el token {source_root}, que ya incluye {load_id}."
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "required": ["database", "schema", "table", "load_type"],
+      "additionalProperties": false,
+      "properties": {
+        "database": {
+          "type": "string",
+          "const": "BRONZE",
+          "description": "Toda entidad aterriza en la base de datos BRONZE — el aterrizaje crudo es siempre la capa Bronze del medallion."
+        },
+        "schema": {
+          "type": "string",
+          "const": "LANDING"
+        },
+        "table": {
+          "type": "string",
+          "pattern": "^TB_[A-Z][A-Z0-9_]*$",
+          "description": "Nombre físico de la tabla, patrón TB_<ENTIDAD> (sin infijo de capa: la base de datos ya dice Bronze)."
+        },
+        "load_type": {
+          "type": "string",
+          "enum": ["full", "append"],
+          "description": "full: TRUNCATE + COPY (dimensiones). append: DELETE por load_id + COPY (hechos)."
+        }
+      }
+    },
+    "columns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "type": {
+            "type": "string",
+            "description": "Tipo Snowflake válido (NUMBER, STRING, DATE, NUMBER(p,s)...)."
+          }
+        }
+      }
+    },
+    "data_vault": {
+      "type": "object",
+      "description": "O bien la entidad alimenta un hub (con business_key propia), o bien alimenta directamente un link (entidades débiles: partsupp, lineitem). Nunca ambos.",
+      "oneOf": [
+        {
+          "required": ["hub", "business_key", "hashdiff_exclude"],
+          "additionalProperties": false,
+          "properties": {
+            "hub": {"type": "string", "pattern": "^hub_[a-z_]+$"},
+            "business_key": {
+              "type": "array", "minItems": 1, "items": {"type": "string"}
+            },
+            "hashdiff_exclude": {
+              "type": "array", "items": {"type": "string"}
+            },
+            "links": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name", "columns"],
+                "additionalProperties": false,
+                "properties": {
+                  "name": {"type": "string", "pattern": "^lnk_[a-z_]+$"},
+                  "columns": {
+                    "type": "array", "minItems": 2, "items": {"type": "string"},
+                    "description": "Columnas ordenadas que componen el hash key del link — el orden es parte del contrato."
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "required": ["link", "link_columns", "hashdiff_exclude"],
+          "additionalProperties": false,
+          "properties": {
+            "link": {"type": "string", "pattern": "^lnk_[a-z_]+$"},
+            "link_columns": {
+              "type": "array", "minItems": 2, "items": {"type": "string"}
+            },
+            "dependent_child": {
+              "type": "array", "items": {"type": "string"},
+              "description": "Subconjunto de link_columns que es clave de hijo dependiente (ej. l_linenumber en lineitem), no una business key real."
+            },
+            "hashdiff_exclude": {
+              "type": "array", "items": {"type": "string"}
+            }
+          }
+        }
+      ]
+    },
+    "orchestration": {
+      "type": "object",
+      "required": ["dag_group", "depends_on", "ingest_priority"],
+      "additionalProperties": false,
+      "properties": {
+        "dag_group": {"type": "string"},
+        "depends_on": {
+          "type": "array", "items": {"type": "string"},
+          "description": "Nombres de otras entidades (campo 'entity') que deben cargarse antes que esta."
+        },
+        "ingest_priority": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

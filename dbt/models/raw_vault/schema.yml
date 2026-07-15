@@ -1,0 +1,193 @@
+version: 2
+
+models:
+  # --- Hubs: la hash key es única y no nula (una fila por business key) ---
+  - name: hub_region
+    columns:
+      - name: hk_region
+        tests: [unique, not_null]
+  - name: hub_nation
+    columns:
+      - name: hk_nation
+        tests: [unique, not_null]
+  - name: hub_customer
+    columns:
+      - name: hk_customer
+        tests: [unique, not_null]
+  - name: hub_supplier
+    columns:
+      - name: hk_supplier
+        tests: [unique, not_null]
+  - name: hub_part
+    columns:
+      - name: hk_part
+        tests: [unique, not_null]
+  - name: hub_order
+    columns:
+      - name: hk_order
+        tests: [unique, not_null]
+
+  # --- Links: la hash key propia es única; los FK deben existir en su hub ---
+  - name: lnk_nation_region
+    columns:
+      - name: hk_nation_region
+        tests: [unique, not_null]
+      - name: hk_nation
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('hub_nation'), field: hk_nation}
+      - name: hk_region
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('hub_region'), field: hk_region}
+  - name: lnk_customer_nation
+    columns:
+      - name: hk_customer_nation
+        tests: [unique, not_null]
+      - name: hk_customer
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('hub_customer'), field: hk_customer}
+      - name: hk_nation
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('hub_nation'), field: hk_nation}
+  - name: lnk_supplier_nation
+    columns:
+      - name: hk_supplier_nation
+        tests: [unique, not_null]
+      - name: hk_supplier
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('hub_supplier'), field: hk_supplier}
+      - name: hk_nation
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('hub_nation'), field: hk_nation}
+  - name: lnk_order_customer
+    columns:
+      - name: hk_order_customer
+        tests: [unique, not_null]
+      - name: hk_order
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('hub_order'), field: hk_order}
+      - name: hk_customer
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('hub_customer'), field: hk_customer}
+  - name: lnk_part_supplier
+    columns:
+      - name: hk_part_supplier
+        tests: [unique, not_null]
+      - name: hk_part
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('hub_part'), field: hk_part}
+      - name: hk_supplier
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('hub_supplier'), field: hk_supplier}
+  - name: lnk_lineitem
+    columns:
+      - name: hk_lineitem
+        tests: [unique, not_null]
+      - name: hk_order
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('hub_order'), field: hk_order}
+      - name: hk_part
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('hub_part'), field: hk_part}
+      - name: hk_supplier
+        tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('hub_supplier'), field: hk_supplier}
+
+  # --- Satélites: la combinación (hash key, load_dts) es única; hash key -> hub/link padre ---
+  - name: sat_region
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [hk_region, load_dts]}
+    columns:
+      - name: hk_region
+        tests:
+          - relationships:
+              arguments: {to: ref('hub_region'), field: hk_region}
+  - name: sat_nation
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [hk_nation, load_dts]}
+    columns:
+      - name: hk_nation
+        tests:
+          - relationships:
+              arguments: {to: ref('hub_nation'), field: hk_nation}
+  - name: sat_customer
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [hk_customer, load_dts]}
+    columns:
+      - name: hk_customer
+        tests:
+          - relationships:
+              arguments: {to: ref('hub_customer'), field: hk_customer}
+  - name: sat_supplier
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [hk_supplier, load_dts]}
+    columns:
+      - name: hk_supplier
+        tests:
+          - relationships:
+              arguments: {to: ref('hub_supplier'), field: hk_supplier}
+  - name: sat_part
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [hk_part, load_dts]}
+    columns:
+      - name: hk_part
+        tests:
+          - relationships:
+              arguments: {to: ref('hub_part'), field: hk_part}
+  - name: sat_order
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [hk_order, load_dts]}
+    columns:
+      - name: hk_order
+        tests:
+          - relationships:
+              arguments: {to: ref('hub_order'), field: hk_order}
+  - name: sat_part_supplier
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [hk_part_supplier, load_dts]}
+    columns:
+      - name: hk_part_supplier
+        tests:
+          - relationships:
+              arguments: {to: ref('lnk_part_supplier'), field: hk_part_supplier}
+  - name: sat_lineitem
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments: {combination_of_columns: [hk_lineitem, load_dts]}
+    columns:
+      - name: hk_lineitem
+        tests:
+          - relationships:
+              arguments: {to: ref('lnk_lineitem'), field: hk_lineitem}

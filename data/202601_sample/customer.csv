@@ -1,0 +1,23 @@
+c_custkey,c_name,c_address,c_nationkey,c_phone,c_acctbal,c_mktsegment,c_comment
+1,Customer#000000001,"231 Logistics Park, Spain",0,30-356-361-2307,2091.2,TECH,Luna account for tech purchases and scheduled replenishment.
+2,Customer#000000002,"771 Logistics Park, Germany",1,30-661-652-2078,7687.03,BUILDING,Urban account for building purchases and scheduled replenishment.
+3,Customer#000000003,"433 Market St, France",2,30-863-509-6070,7156.65,AUTOMOBILE,Cedar account for automobile purchases and scheduled replenishment.
+4,Customer#000000004,"601 Central Blvd, United States",3,31-248-857-9800,7486.48,ENERGY,Pioneer account for energy purchases and scheduled replenishment.
+5,Customer#000000005,"283 Logistics Park, Mexico",4,31-119-527-3731,5188.12,TECH,Cedar account for tech purchases and scheduled replenishment.
+6,Customer#000000006,"437 Logistics Park, Brazil",5,31-843-773-8186,7141.56,RETAIL,Vertex account for retail purchases and scheduled replenishment.
+7,Customer#000000007,"293 Harbor Rd, China",6,32-699-796-1770,1845.21,TECH,Cedar account for tech purchases and scheduled replenishment.
+8,Customer#000000008,"88 Tech Park, India",7,32-946-120-4421,10245.33,TECH,Vertex account expanded after year-end contract renewal and higher service volumes.
+9,Customer#000000009,"266 Logistics Park, Morocco",8,33-520-217-3850,799.47,BUILDING,Pioneer account for building purchases and scheduled replenishment.
+10,Customer#000000010,"821 Coastal Way, Egypt",9,33-800-861-5107,7969.06,RETAIL,Harbor account for retail purchases and scheduled replenishment.
+11,Customer#000000011,"169 Logistics Park, Spain",0,30-756-188-6030,6490.84,TECH,Sol account for tech purchases and scheduled replenishment.
+12,Customer#000000012,"84 Central Blvd, Germany",1,30-225-329-6270,7628.3,AUTOMOBILE,Harbor account for automobile purchases and scheduled replenishment.
+13,Customer#000000013,"879 Industrial Ave, France",2,30-178-789-2367,8802.76,BUILDING,Nimbus account for building purchases and scheduled replenishment.
+14,Customer#000000014,"102 Warehouse Loop, United States",3,31-641-105-2204,3588.4,BUILDING,Pioneer account reclassified to building demand after distributor integration.
+15,Customer#000000015,"9 Gran Via, Mexico",4,31-362-520-9986,9281.84,ENERGY,Cobalt account for energy purchases and scheduled replenishment.
+16,Customer#000000016,"745 Gran Via, Brazil",5,31-450-443-6981,5695.89,AUTOMOBILE,Golden account for automobile purchases and scheduled replenishment.
+17,Customer#000000017,"867 Market St, China",6,32-717-327-6947,7924.1,BUILDING,Luna account for building purchases and scheduled replenishment.
+18,Customer#000000018,"668 Coastal Way, India",7,32-646-742-5374,6099.43,RETAIL,Harbor account for retail purchases and scheduled replenishment.
+19,Customer#000000019,"14 Atlantic Hub, Morocco",8,33-822-445-1190,5477.88,BUILDING,Harbor account shifted to an Atlantic distribution hub for regional consolidation.
+20,Customer#000000020,"921 Market St, Egypt",9,33-437-884-6948,4418.44,RETAIL,Apex account for retail purchases and scheduled replenishment.
+21,Customer#000000021,"45 Avenida Atlântica, Portugal",10,30-118-774-5520,6844.91,TECH,Lusitano account onboarded in January for Iberian electronics replenishment.
+22,Customer#000000022,"210 Porto Trade Hub, Portugal",10,30-223-118-6642,5132.77,RETAIL,Atlantic account onboarded in January for multi-country spare parts distribution.

@@ -1,0 +1,3 @@
+# Dependencias solo para desarrollo/tests en local — NO se instalan en el contenedor Astro.
+# Instalar con: pip install -r requirements.txt -r requirements-dev.txt
+pytest==9.1.1

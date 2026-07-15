@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumen Ejecutivo — Pipeline Ventas (TPC-H · Snowflake · Data Vault 2.0 · Airflow)</title>
+<style>
+  :root {
+    --ink: #1c2733;
+    --ink-soft: #4a5a6a;
+    --ink-faint: #5b6b7c;
+    --bg: #f6f8fa;
+    --card: #ffffff;
+    --line: #dde5ec;
+    --accent: #0e5a8a;
+    --accent-soft: #e3eef6;
+    --bronze: #8a5a38;      --bronze-bg: #f8efe7;
+    --silver: #4d5d70;      --silver-bg: #edf1f6;
+    --gold:   #7d6113;      --gold-bg:   #faf4e0;
+    --meta:   #7a6a94;      --meta-bg:   #f2eef8;
+    --ok: #1a7f4b;          --ok-bg: #e5f4ec;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background: var(--bg); color: var(--ink);
+    line-height: 1.55; font-size: 15.5px;
+    padding: 40px 20px 70px;
+  }
+  .page { max-width: 980px; margin: 0 auto; }
+
+  /* ---------- Cabecera ---------- */
+  header { margin-bottom: 34px; }
+  .kicker {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+  }
+  h1 { font-size: 30px; line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 10px; }
+  .subtitle { color: var(--ink-soft); font-size: 16.5px; max-width: 62ch; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .chip {
+    background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+    padding: 5px 14px; font-size: 13px; font-weight: 600; color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .chip b { color: var(--accent); font-weight: 700; }
+
+  /* ---------- Secciones ---------- */
+  section { margin-bottom: 30px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 26px 30px;
+  }
+  h2 {
+    font-size: 19px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+  }
+  h2::before {
+    content: ""; display: inline-block; width: 5px; height: 21px;
+    background: var(--accent); border-radius: 3px; flex: none;
+  }
+  h3 { font-size: 15px; margin: 18px 0 8px; color: var(--ink); }
+  p { margin-bottom: 10px; color: var(--ink-soft); }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); }
+  ul { margin: 0 0 10px 20px; color: var(--ink-soft); }
+  li { margin-bottom: 6px; }
+  li:last-child { margin-bottom: 0; }
+  code {
+    font-family: Consolas, "Cascadia Code", monospace; font-size: 0.88em;
+    background: var(--accent-soft); color: var(--accent);
+    padding: 1.5px 6px; border-radius: 5px; white-space: nowrap;
+  }
+  .quote {
+    border-left: 4px solid var(--accent); background: var(--accent-soft);
+    border-radius: 0 8px 8px 0; padding: 12px 18px; margin: 14px 0;
+    font-size: 15px; color: var(--ink); font-style: italic;
+  }
+  .quote b { font-style: normal; }
+
+  /* ---------- Diagrama de capas ---------- */
+  .flow { display: flex; flex-direction: column; gap: 0; margin: 18px 0 6px; }
+  .layer {
+    border-radius: 10px; padding: 14px 20px; border: 1px solid var(--line);
+    display: grid; grid-template-columns: 190px 1fr; gap: 6px 18px; align-items: baseline;
+  }
+  .layer .name { font-weight: 800; font-size: 15px; font-family: Consolas, monospace; }
+  .layer .desc { color: var(--ink-soft); font-size: 14px; }
+  .layer.src    { background: var(--card); }
+  .layer.bronze { background: var(--bronze-bg); border-color: #e8d5c4; }
+  .layer.bronze .name { color: var(--bronze); }
+  .layer.silver { background: var(--silver-bg); border-color: #d4dde8; }
+  .layer.silver .name { color: var(--silver); }
+  .layer.gold   { background: var(--gold-bg); border-color: #ecdfb2; }
+  .layer.gold .name { color: var(--gold); }
+  .layer.meta   { background: var(--meta-bg); border-color: #ddd3ec; margin-top: 14px; }
+  .layer.meta .name { color: var(--meta); }
+  .arrow {
+    text-align: center; color: var(--ink-faint); font-size: 12.5px;
+    padding: 7px 0; position: relative;
+  }
+  .arrow::before { content: "▼ "; color: var(--accent); font-size: 10px; }
+  .arrow code { white-space: normal; }
+
+  /* ---------- Tablas ---------- */
+  .tbl-wrap { overflow-x: auto; margin: 12px 0 4px; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th {
+    text-align: left; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-faint); padding: 8px 12px; border-bottom: 2px solid var(--line);
+    white-space: nowrap;
+  }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--line); color: var(--ink-soft); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td b { color: var(--ink); }
+
+  /* ---------- Tarjetas de cifras (evidencia 202601) ---------- */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 16px 0 8px; }
+  .stat {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 16px; text-align: center;
+  }
+  .stat .num { font-size: 24px; font-weight: 800; color: var(--accent); letter-spacing: -0.01em; }
+  .stat .num .from { color: var(--ink-faint); font-weight: 600; }
+  .stat .lbl { font-size: 12.5px; color: var(--ink-soft); margin-top: 3px; font-family: Consolas, monospace; }
+  .stat .why { font-size: 12.5px; color: var(--ink-faint); margin-top: 4px; }
+  .stat.ok .num { color: var(--ok); }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .pill {
+    font-size: 13px; padding: 4px 12px; border-radius: 999px; font-weight: 600;
+    background: var(--ok-bg); color: var(--ok); border: 1px solid #c4e5d2;
+  }
+
+  /* ---------- Dos columnas ---------- */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  @media (max-width: 760px) {
+    .cols { grid-template-columns: 1fr; }
+    .layer { grid-template-columns: 1fr; }
+  }
+
+  footer {
+    margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--line);
+    font-size: 13px; color: var(--ink-faint); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; font-size: 12.5px; }
+    .card { border: 1px solid #ccc; break-inside: avoid; }
+    section { margin-bottom: 16px; }
+    .chips .chip { border-color: #bbb; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div class="kicker">Resumen ejecutivo · Prueba técnica SDG Group</div>
+  <h1>Pipeline Ventas: de CSV mensual a mart analítico, gobernado por metadata</h1>
+  <p class="subtitle">
+    Pipeline end-to-end que ingiere entregas mensuales de CSV (TPC-H) en <strong>Snowflake</strong>,
+    las historiza como <strong>Data Vault 2.0</strong> con <strong>dbt</strong> y las expone en una
+    <strong>estrella Kimball</strong>, orquestado por <strong>Airflow</strong>. Todo el pipeline se
+    parametriza con una sola variable (<code>load_id</code>) y se define en metadata declarativa (YAML).
+  </p>
+  <div class="chips">
+    <div class="chip"><b>8</b> entidades TPC-H</div>
+    <div class="chip"><b>2</b> cargas: 202512 · 202601</div>
+    <div class="chip"><b>1</b> parámetro: <b>load_id</b></div>
+    <div class="chip"><b>41</b> modelos dbt</div>
+  </div>
+</header>
+
+<!-- ============ 1. ENFOQUE ============ -->
+<section class="card">
+  <h2>El enfoque: metadata-driven de verdad</h2>
+  <p>
+    Un <strong>contrato YAML por entidad</strong> (<code>metadata/entities/*.yml</code>) es la única
+    fuente de verdad: origen del fichero, columnas con tipos, tipo de carga (full/append), clasificación
+    Data Vault (hub o link, clave de negocio) y dependencias de orquestación. De ese único fichero se
+    derivan el <code>CREATE TABLE</code> de Bronze, el <code>COPY INTO</code>, las vistas de staging con
+    sus hashes y las tareas de Airflow — lo consumen <strong>tres piezas independientes</strong>: el motor de
+    ingesta, el generador de código dbt y la fábrica de DAGs.
+  </p>
+  <p>
+    La metadata se valida contra un <strong>JSON Schema</strong> (<code>metadata/schema/entity.schema.json</code>)
+    con <code>pytest</code>, en segundos y sin tocar Snowflake: <em>la metadata es código, y se valida como código</em>.
+  </p>
+  <div class="quote">
+    "Si mañana llega una novena tabla, es un fichero YAML nuevo — <b>cero líneas de Python o SQL tocadas</b>."
+  </div>
+</section>
+
+<!-- ============ 2. ARQUITECTURA ============ -->
+<section class="card">
+  <h2>Arquitectura por capas — Medallion real, no solo narrativa</h2>
+  <p>
+    Cada capa es una <strong>base de datos</strong> de Snowflake, no un esquema: <code>GRANT ON DATABASE</code>
+    es la frontera de aislamiento más simple de razonar y la más difícil de traspasar por error.
+  </p>
+
+  <div class="flow">
+    <div class="layer src">
+      <div class="name">CSV mensuales</div>
+      <div class="desc"><code>data/{load_id}_sample/</code> — 8 ficheros por entrega (en producción: ADLS Gen2)</div>
+    </div>
+    <div class="arrow"><code>ingestion/loader.py</code> — PUT + COPY INTO, idempotente, con auditoría</div>
+    <div class="layer bronze">
+      <div class="name">BRONZE.LANDING</div>
+      <div class="desc">Aterrizaje crudo 1:1 + columnas técnicas (<code>load_id</code>, <code>load_dts</code>, fichero y fila de origen). Tablas <strong>transient</strong>: re-derivables del CSV, sin coste de Fail-safe.</div>
+    </div>
+    <div class="arrow">dbt (capas <code>raw</code> + <code>staging</code>) — vistas: filtro por <code>load_id</code> + hashes <code>hk_</code>/<code>hd_</code></div>
+    <div class="layer silver">
+      <div class="name">SILVER.STAGING → SILVER.VAULT</div>
+      <div class="desc"><strong>Data Vault 2.0</strong>: 6 hubs · 6 links · 8 satélites, insert-only. El sistema de registro: historia completa y auditable, tablas <strong>permanent</strong>.</div>
+    </div>
+    <div class="arrow">dbt (capa <code>mart</code>) — los joins se resuelven en build, no en consulta</div>
+    <div class="layer gold">
+      <div class="name">GOLD.MART</div>
+      <div class="desc"><strong>Estrella Kimball</strong>: <code>TB_FCT_ORDER_LINE</code> (grano: línea de pedido, incremental) + 4 dimensiones, con SCD2 en cliente. BI consulta datos ya planos.</div>
+    </div>
+    <div class="layer meta">
+      <div class="name">META.CONTROL</div>
+      <div class="desc">Transversal (control-plane, sin color de capa): <code>TB_VENTAS_LOAD_AUDIT</code> — una fila por (entidad, load_id, capa) con filas cargadas, estado y run de Airflow.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. INGESTA ============ -->
+<section class="card">
+  <h2>Ingesta: un único motor genérico e idempotente</h2>
+  <p>
+    <code>ingestion/loader.py</code> no contiene lógica de ninguna entidad concreta. Por cada entidad ejecuta
+    el mismo contrato de 5 pasos:
+  </p>
+  <ul>
+    <li><strong>1 · Crear si no existe</strong> — <code>CREATE TRANSIENT TABLE IF NOT EXISTS</code> en Bronze, con las columnas del YAML.</li>
+    <li><strong>2 · Subir el fichero</strong> — <code>PUT</code> al stage interno <code>STG_VENTAS_CSV</code>, organizado por <code>{load_id}/{entidad}/</code>.</li>
+    <li><strong>3 · Limpiar la partición</strong> — <code>TRUNCATE</code> (entidades full) o <code>DELETE WHERE load_id</code> (append): relanzar nunca duplica.</li>
+    <li><strong>4 · Cargar</strong> — <code>COPY INTO</code> con <code>FORCE=TRUE</code> <em>siempre</em>: el load history de Snowflake sobrevive al DELETE y, sin FORCE, un re-run saltaría los ficheros ya vistos cargando 0 filas en silencio.</li>
+    <li><strong>5 · Auditar</strong> — INSERT en <code>META.CONTROL.TB_VENTAS_LOAD_AUDIT</code> con estado SUCCESS/FAILED, filas cargadas y run de Airflow.</li>
+  </ul>
+  <p>
+    De las 8 entidades, 6 son <strong>full</strong> (catálogos y maestros) y 2 son <strong>append</strong>
+    (<code>orders</code>, <code>lineitem</code>: los hechos transaccionales que crecen cada mes).
+  </p>
+</section>
+
+<!-- ============ 4. DATA VAULT ============ -->
+<section class="card">
+  <h2>Silver: Data Vault 2.0 — historia sin UPDATE ni DELETE</h2>
+  <div class="cols">
+    <div>
+      <p>
+        <strong>20 objetos</strong> generados desde la misma metadata que alimenta la ingesta:
+        <strong>6 hubs</strong> (una fila por clave de negocio), <strong>6 links</strong> (relaciones)
+        y <strong>8 satélites</strong> (atributos historizados por <em>hashdiff</em>).
+      </p>
+      <p>
+        Dos hashes con propósitos distintos: la <strong>hash key</strong> (<code>hk_</code>) identifica
+        — MD5 de la clave de negocio —, y el <strong>hashdiff</strong> (<code>hd_</code>) detecta cambio:
+        huella de todos los atributos, comparada contra la versión anterior sin mirar columna a columna.
+      </p>
+      <p>
+        El SQL repetitivo del patrón (deduplicación con ROW_NUMBER, historización con LAG sobre hashdiff)
+        lo genera el paquete <strong>automate_dv</strong>: se escribe una vez, no veinte.
+      </p>
+    </div>
+    <div>
+      <p><strong>Los dos matices de modelado que definen el diseño:</strong></p>
+      <ul>
+        <li><code>lineitem</code> <strong>no tiene hub</strong>: es una entidad débil (no existe fuera de su pedido), modelada como link de order+part+supplier con <code>l_linenumber</code> como <em>dependent child key</em>.</li>
+        <li><code>partsupp</code> es el <strong>link + satélite de libro</strong>: el stock y el coste pertenecen a la relación pieza-proveedor, no a ninguna de las dos por separado.</li>
+      </ul>
+      <p>
+        El vault es <strong>insert-only</strong>: nada se actualiza ni se borra; si el hashdiff no cambió,
+        no se inserta nada. Esa propiedad es la segunda mitad de la idempotencia del pipeline.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. ORQUESTACIÓN ============ -->
+<section class="card">
+  <h2>Orquestación: el DAG se construye solo desde la metadata</h2>
+  <p>
+    <code>dags/dag_factory.py</code> es el único fichero de DAGs y no menciona ninguna tabla ni entidad:
+    en cada parseo lee la metadata y construye el DAG <code>ventas_monthly</code> con esta secuencia:
+  </p>
+  <p style="text-align:center; font-family:Consolas,monospace; font-size:14px; color:var(--ink); background:var(--accent-soft); border-radius:8px; padding:10px 14px;">
+    ingest (8 tasks, cableadas por <b>depends_on</b>) → dbt_raw → dbt_staging → dbt_raw_vault → dbt_mart → verify
+  </p>
+  <ul>
+    <li><strong>astronomer-cosmos</strong> traduce cada modelo dbt en una task nativa de Airflow (selección por <code>tag:&lt;capa&gt;</code>): el hub/link/satélite se ve dibujándose solo en la UI, con estado y logs por modelo.</li>
+    <li><strong>dbt vive en un venv aislado</strong> dentro del contenedor (conflicto real de <code>protobuf</code> entre dbt-core y Airflow); Cosmos lo invoca por subprocess apuntando al binario del venv — el patrón que recomienda Astronomer.</li>
+    <li><strong><code>verify</code></strong> cierra el pipeline: falla el run si alguna entidad de este (load_id, run) no tiene SUCCESS en la tabla de auditoría.</li>
+  </ul>
+</section>
+
+<!-- ============ 6. EVIDENCIA 202601 ============ -->
+<section class="card">
+  <h2>La prueba clave: la segunda carga, sin tocar código</h2>
+  <p>
+    Disparar el mismo DAG cambiando solo <code>{"load_id": "202601"}</code> resuelve el segundo drop completo
+    — ni un fichero tocado, ni una línea de código. Números verificados en Snowflake:
+  </p>
+  <div class="stats">
+    <div class="stat"><div class="num"><span class="from">20 →</span> 22</div><div class="lbl">hub_customer</div><div class="why">2 clientes nuevos</div></div>
+    <div class="stat"><div class="num"><span class="from">10 →</span> 11</div><div class="lbl">hub_nation</div><div class="why">nueva: Portugal</div></div>
+    <div class="stat"><div class="num"><span class="from">100 →</span> 210</div><div class="lbl">hub_order</div><div class="why">+110, cero solape de claves</div></div>
+    <div class="stat"><div class="num"><span class="from">20 →</span> 25</div><div class="lbl">sat_customer</div><div class="why">2 nuevos + 3 con cambio real</div></div>
+  </div>
+  <p>
+    <strong>El matiz que distingue al pipeline:</strong> el diff de texto del CSV de clientes muestra 6 filas
+    distintas, pero 3 son solo un cero decimal de más (<code>2091.20</code> vs <code>2091.2</code>) — el mismo
+    valor una vez tipado <code>NUMBER(12,2)</code> en Bronze. El hashdiff correctamente <em>no</em> las trata
+    como cambio: solo 3 clientes cambiaron de verdad.
+  </p>
+  <div class="pill-row">
+    <div class="pill">✓ Relanzar la misma carga → 0 filas nuevas en las 20 tablas del vault</div>
+    <div class="pill">✓ Verificación reproducible: dbt/analyses/verify_load_202601.sql</div>
+  </div>
+</section>
+
+<!-- ============ 7. GOBIERNO ============ -->
+<section class="card">
+  <h2>Seguridad, coste y calidad</h2>
+  <h3>RBAC mínimo — 3 roles funcionales con grants directos</h3>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Rol</th><th>Puede</th><th>No puede</th></tr>
+    <tr><td><b><code>ROLE_VENTAS_LOADER_FR</code></b></td><td>Escribir BRONZE, stage y auditoría (META)</td><td>Tocar SILVER ni GOLD</td></tr>
+    <tr><td><b><code>ROLE_VENTAS_TRANSFORMER_FR</code></b></td><td>Leer BRONZE; escribir SILVER y GOLD; leer META</td><td>Escribir en BRONZE ni en la auditoría</td></tr>
+    <tr><td><b><code>ROLE_VENTAS_ANALYST_FR</code></b></td><td>Leer GOLD.MART</td><td>Ver BRONZE, SILVER o META — ni sabe que existen</td></tr>
+  </table>
+  </div>
+  <h3>Coste bajo control</h3>
+  <p>
+    Un warehouse <strong>XS</strong> por carga de trabajo — <code>WH_VENTAS_INGEST_XS</code>,
+    <code>WH_VENTAS_DBT_XS</code>, <code>WH_VENTAS_BI_XS</code> — todos con auto-suspend a 60 s y auto-resume:
+    la ingesta nunca compite con BI, y escalar es un <code>ALTER</code>, no una migración.
+  </p>
+  <h3>Calidad en tres frentes</h3>
+  <ul>
+    <li><strong>Contrato</strong> — <code>python -m pytest</code> (20/20 PASS) valida cada YAML contra el JSON Schema, en segundos y sin Snowflake.</li>
+    <li><strong>Datos</strong> — 80 tests dbt (<code>unique</code>, <code>not_null</code>, <code>relationships</code>) intercalados en el build (121/121 PASS entre modelos y tests): un modelo roto corta el pipeline antes de propagar el error.</li>
+    <li><strong>Operación</strong> — la task <code>verify</code> + <code>META.CONTROL.TB_VENTAS_LOAD_AUDIT</code> trazan cada carga de punta a punta.</li>
+  </ul>
+</section>
+
+<!-- ============ 8. AZURE ============ -->
+<section class="card">
+  <h2>Camino a producción: Azure + CI/CD</h2>
+  <p>
+    Cada pieza local tiene un equivalente productivo directo — la lógica (metadata, loader, dbt, DAGs)
+    no cambia; solo cambia dónde viven los ficheros, las credenciales y el runtime.
+  </p>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Función</th><th>En local (lo construido)</th><th>En Azure</th></tr>
+    <tr><td>Almacenamiento de ficheros</td><td><code>data/</code> local</td><td><b>ADLS Gen2</b></td></tr>
+    <tr><td>Entrada a Snowflake</td><td>Stage interno + <code>PUT</code></td><td><b>External stage + storage integration</b></td></tr>
+    <tr><td>Orquestación</td><td>Astro CLI + Docker</td><td><b>Airflow gestionado</b> (Astronomer / ADF)</td></tr>
+    <tr><td>Credenciales</td><td>Fichero <code>.env</code></td><td><b>Azure Key Vault</b></td></tr>
+    <tr><td>CI/CD</td><td>Scripts a mano</td><td><b>GitHub Actions</b></td></tr>
+    <tr><td>Consumo analítico</td><td>Query en Snowsight</td><td><b>Power BI</b> sobre <code>GOLD.MART</code></td></tr>
+  </table>
+  </div>
+  <h3>Flujo CI/CD</h3>
+  <p>
+    <strong>PR</strong> → lint + validación de metadata contra JSON Schema + pytest + <code>dbt build</code> en esquema de pruebas ·
+    <strong>Merge</strong> → despliegue de DAGs y metadata + <code>dbt build</code> en producción ·
+    <strong>Infra Snowflake</strong> versionada en el repo (<code>00_setup.sql</code>, idempotente).
+  </p>
+  <div class="quote">"Desplegar un pipeline nuevo = <b>mergear un YAML</b>."</div>
+  <h3>Qué NO se construyó, a propósito</h3>
+  <p>
+    <strong>Snowpipe</strong> (la cadencia es mensual, no continua), <strong>políticas de PII</strong> (TPC-H no
+    tiene dato sensible real) y <strong>alerting a Teams/Slack</strong> (callbacks de Airflow como punto de
+    enganche). Decisiones de alcance, no carencias: cada una tiene un punto de enganche claro en el diseño.
+  </p>
+</section>
+
+<!-- ============ 9. CONVENCIONES ============ -->
+<section class="card">
+  <h2>Convenciones de nombres</h2>
+  <div class="tbl-wrap">
+  <table>
+    <tr><th>Objeto</th><th>Patrón</th><th>Objeto</th><th>Patrón</th></tr>
+    <tr><td>Tablas / vistas</td><td><code>TB_</code> / <code>VW_</code></td><td>Hub / link / satélite</td><td><code>hub_</code> / <code>lnk_</code> / <code>sat_</code></td></tr>
+    <tr><td>Warehouses</td><td><code>WH_*_XS</code></td><td>Hash key / hashdiff</td><td><code>hk_</code> / <code>hd_</code></td></tr>
+    <tr><td>Roles</td><td><code>ROLE_*_FR</code></td><td>Columnas mart</td><td><code>ID_ CO_ DS_ QT_ VL_ DT_ FL_ FK_</code></td></tr>
+  </table>
+  </div>
+  <p style="margin-top:10px;">
+    La convención de negocio se aplica <strong>solo en Gold</strong>; Silver mantiene el estándar
+    Data Vault intacto.
+  </p>
+</section>
+
+<footer>
+  <span>Pipeline Ventas — TPC-H · Snowflake · Data Vault 2.0 · Kimball · dbt · Airflow (Cosmos)</span>
+  <span>Todas las cifras de este documento son verificables en pantalla contra el repositorio y Snowflake.</span>
+</footer>
+
+</div>
+</body>
+</html>

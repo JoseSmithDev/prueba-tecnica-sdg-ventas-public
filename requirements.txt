@@ -1,0 +1,18 @@
+# Astro Runtime includes the following pre-installed providers packages: https://www.astronomer.io/docs/astro/runtime-image-architecture#provider-packages
+
+# dbt-core/dbt-snowflake NO se instalan aquí (en el venv de Airflow) a
+# propósito: dbt-core reciente exige protobuf>=6.0, y Airflow trae
+# opentelemetry-proto que todavía exige protobuf<6.0 — un conflicto real y sin
+# solución del ecosistema en este momento si ambos conviven en el mismo
+# entorno Python (se probó con varias versiones de astro-runtime y de
+# dbt-core/dbt-adapters: ninguna combinación resuelve). La solución estándar
+# de Astronomer/Cosmos es instalar dbt en un venv aislado — ver el `RUN
+# python -m venv /usr/local/airflow/dbt_venv` en el Dockerfile — y apuntar
+# Cosmos a ese binario vía `ExecutionConfig(dbt_executable_path=...)`
+# (orchestration/dbt_layers.py). Aquí solo va lo que necesita el propio
+# Airflow: Cosmos (orquesta, no ejecuta dbt en este venv) + el conector de
+# Snowflake que usa ingestion/loader.py desde las tasks de ingesta.
+astronomer-cosmos==1.14.2
+snowflake-connector-python==4.6.0
+pyyaml==6.0.2
+jsonschema==4.26.0

@@ -1,0 +1,17 @@
+# GENERATED FROM metadata/entities/*.yml — no editar a mano,
+# volver a ejecutar `python -m scripts.generate_staging`
+version: 2
+
+sources:
+  - name: bronze
+    database: BRONZE
+    schema: LANDING
+    tables:
+      - name: tb_part
+      - name: tb_region
+      - name: tb_nation
+      - name: tb_customer
+      - name: tb_supplier
+      - name: tb_orders
+      - name: tb_partsupp
+      - name: tb_lineitem

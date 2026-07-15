@@ -1,0 +1,11 @@
+n_nationkey,n_name,n_regionkey,n_comment
+0,SPAIN,0,Iberian market with strong retail and hospitality demand
+1,GERMANY,0,Industrial and manufacturing demand center
+2,FRANCE,0,Mixed consumer and industrial demand center
+3,UNITED STATES,1,Large domestic and distribution market
+4,MEXICO,1,Nearshore manufacturing and assembly market
+5,BRAZIL,1,Regional demand for construction and infrastructure
+6,CHINA,2,Electronics and components sourcing market
+7,INDIA,2,Industrial supply and services market
+8,MOROCCO,3,Regional logistics and distribution hub
+9,EGYPT,3,Trade corridor market with mixed demand

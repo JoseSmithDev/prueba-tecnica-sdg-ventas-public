@@ -1,0 +1,22 @@
+services:
+  scheduler:
+    environment:
+      # Cosmos parsea las 4 capas dbt en tiempo de parseo (dbt ls por subprocess
+      # contra Snowflake real, ver orchestration/dbt_layers.py) — supera el
+      # timeout de 30s por defecto de Airflow. 180s es holgado para un DAG de
+      # este tamaño (41 modelos); en producción se evitaría con un
+      # `manifest.json` precompilado (LoadMode.DBT_MANIFEST).
+      AIRFLOW__CORE__DAGBAG_IMPORT_TIMEOUT: "180"
+    volumes:
+      # metadata/: dag_factory.py la relee en cada parseo (~30s) -> añadir un
+      # YAML de entidad hace aparecer tasks nuevas sin reiniciar nada.
+      - ./metadata:/usr/local/airflow/metadata
+      # ingestion/: código del motor genérico que ejecutan las tasks del
+      # TaskGroup "ingest" (PythonOperator).
+      - ./ingestion:/usr/local/airflow/ingestion
+      # orchestration/: wrapper de Cosmos (dbt_layers.py) y la task "verify".
+      - ./orchestration:/usr/local/airflow/orchestration
+      # dbt/: el proyecto que Cosmos renderiza en tasks nativas de Airflow.
+      - ./dbt:/usr/local/airflow/dbt
+      # data/: los CSV que loader.py sube con PUT desde dentro del contenedor.
+      - ./data:/usr/local/airflow/data

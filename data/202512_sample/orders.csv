@@ -1,0 +1,101 @@
+o_orderkey,o_custkey,o_orderstatus,o_totalprice,o_orderdate,o_orderpriority,o_clerk,o_shippriority,o_comment
+1200001,1,F,43192.29,2025-12-19,3-MEDIUM,Clerk#000000689,0,Split delivery approved by customer planning team.
+1200002,17,F,50045.16,2025-12-05,2-HIGH,Clerk#000000022,0,Consolidated shipment requested for cost control.
+1200003,9,P,25308.50,2025-12-20,2-HIGH,Clerk#000000485,0,Routine replenishment for month-end demand.
+1200004,3,P,41444.18,2025-12-15,2-HIGH,Clerk#000000443,0,Split delivery approved by customer planning team.
+1200005,19,P,59486.76,2025-12-21,2-HIGH,Clerk#000000763,0,Consolidated shipment requested for cost control.
+1200006,8,F,27458.81,2025-12-04,2-HIGH,Clerk#000000933,0,Consolidated shipment requested for cost control.
+1200007,8,P,63715.88,2025-12-16,4-NOT SPECIFIED,Clerk#000000191,0,Order aligned with distribution center refill.
+1200008,7,F,17613.26,2025-12-07,2-HIGH,Clerk#000000174,0,Consolidated shipment requested for cost control.
+1200009,12,F,53748.09,2025-12-15,1-URGENT,Clerk#000000740,0,Split delivery approved by customer planning team.
+1200010,9,P,35671.74,2025-12-25,1-URGENT,Clerk#000000363,0,Split delivery approved by customer planning team.
+1200011,16,F,52988.68,2025-12-11,4-NOT SPECIFIED,Clerk#000000904,0,Expedite only if stockout risk materializes.
+1200012,20,O,41743.04,2025-12-27,4-NOT SPECIFIED,Clerk#000000384,0,Consolidated shipment requested for cost control.
+1200013,3,F,10223.87,2025-12-04,4-NOT SPECIFIED,Clerk#000000075,0,Expedite only if stockout risk materializes.
+1200014,2,P,97743.11,2025-12-22,5-LOW,Clerk#000000385,0,Routine replenishment for month-end demand.
+1200015,15,F,16394.03,2025-12-17,5-LOW,Clerk#000000502,0,Expedite only if stockout risk materializes.
+1200016,19,F,52629.90,2025-12-04,4-NOT SPECIFIED,Clerk#000000757,0,Routine replenishment for month-end demand.
+1200017,5,F,43030.61,2025-12-05,4-NOT SPECIFIED,Clerk#000000868,0,Expedite only if stockout risk materializes.
+1200018,11,P,10392.78,2025-12-21,4-NOT SPECIFIED,Clerk#000000982,0,Order aligned with distribution center refill.
+1200019,8,O,50915.28,2025-12-29,2-HIGH,Clerk#000000691,0,Routine replenishment for month-end demand.
+1200020,12,F,32849.92,2025-12-05,3-MEDIUM,Clerk#000000044,0,Consolidated shipment requested for cost control.
+1200021,12,O,23668.67,2025-12-29,4-NOT SPECIFIED,Clerk#000000366,0,Expedite only if stockout risk materializes.
+1200022,18,O,16771.37,2025-12-23,2-HIGH,Clerk#000000236,0,Order aligned with distribution center refill.
+1200023,1,P,31588.94,2025-12-19,2-HIGH,Clerk#000000203,0,Split delivery approved by customer planning team.
+1200024,4,P,43750.84,2025-12-16,3-MEDIUM,Clerk#000000819,0,Order aligned with distribution center refill.
+1200025,16,F,31376.43,2025-12-06,5-LOW,Clerk#000000174,0,Expedite only if stockout risk materializes.
+1200026,18,O,45615.86,2025-12-27,2-HIGH,Clerk#000000671,0,Standard order created from forecast run.
+1200027,16,F,23675.38,2025-12-12,2-HIGH,Clerk#000000079,0,Order aligned with distribution center refill.
+1200028,2,F,38971.67,2025-12-03,5-LOW,Clerk#000000248,0,Order aligned with distribution center refill.
+1200029,6,F,43373.34,2025-12-01,4-NOT SPECIFIED,Clerk#000000458,0,Standard order created from forecast run.
+1200030,20,F,55814.56,2025-12-02,3-MEDIUM,Clerk#000000989,0,Split delivery approved by customer planning team.
+1200031,18,F,20833.87,2025-12-10,5-LOW,Clerk#000000075,0,Routine replenishment for month-end demand.
+1200032,15,O,32337.17,2025-12-28,5-LOW,Clerk#000000311,0,Routine replenishment for month-end demand.
+1200033,18,O,37792.76,2025-12-25,2-HIGH,Clerk#000000647,0,Order aligned with distribution center refill.
+1200034,14,F,30700.73,2025-12-08,4-NOT SPECIFIED,Clerk#000000765,0,Standard order created from forecast run.
+1200035,4,F,31981.38,2025-12-02,3-MEDIUM,Clerk#000000557,0,Standard order created from forecast run.
+1200036,13,F,33480.43,2025-12-10,5-LOW,Clerk#000000395,0,Order aligned with distribution center refill.
+1200037,5,O,33383.96,2025-12-25,4-NOT SPECIFIED,Clerk#000000970,0,Consolidated shipment requested for cost control.
+1200038,14,P,42066.48,2025-12-23,2-HIGH,Clerk#000000438,0,Expedite only if stockout risk materializes.
+1200039,4,F,47486.47,2025-12-14,1-URGENT,Clerk#000000253,0,Order aligned with distribution center refill.
+1200040,18,O,43985.47,2025-12-31,3-MEDIUM,Clerk#000000560,0,Standard order created from forecast run.
+1200041,13,F,57785.23,2025-12-14,1-URGENT,Clerk#000000411,0,Standard order created from forecast run.
+1200042,6,P,12177.76,2025-12-20,5-LOW,Clerk#000000481,0,Expedite only if stockout risk materializes.
+1200043,2,P,32725.79,2025-12-19,2-HIGH,Clerk#000000250,0,Consolidated shipment requested for cost control.
+1200044,10,F,30631.24,2025-12-16,1-URGENT,Clerk#000000531,0,Order aligned with distribution center refill.
+1200045,10,F,31534.07,2025-12-02,3-MEDIUM,Clerk#000000733,0,Consolidated shipment requested for cost control.
+1200046,6,F,42891.23,2025-12-11,2-HIGH,Clerk#000000295,0,Order aligned with distribution center refill.
+1200047,6,O,27758.34,2025-12-27,2-HIGH,Clerk#000000450,0,Standard order created from forecast run.
+1200048,19,P,42285.72,2025-12-21,4-NOT SPECIFIED,Clerk#000000997,0,Standard order created from forecast run.
+1200049,15,F,39929.65,2025-12-03,3-MEDIUM,Clerk#000000567,0,Routine replenishment for month-end demand.
+1200050,13,F,20603.35,2025-12-01,2-HIGH,Clerk#000000065,0,Expedite only if stockout risk materializes.
+1200051,7,F,20203.94,2025-12-12,3-MEDIUM,Clerk#000000911,0,Split delivery approved by customer planning team.
+1200052,10,P,38016.86,2025-12-18,2-HIGH,Clerk#000000868,0,Routine replenishment for month-end demand.
+1200053,20,P,44348.86,2025-12-22,3-MEDIUM,Clerk#000000874,0,Order aligned with distribution center refill.
+1200054,3,F,22808.95,2025-12-12,4-NOT SPECIFIED,Clerk#000000721,0,Order aligned with distribution center refill.
+1200055,7,O,25931.37,2025-12-28,3-MEDIUM,Clerk#000000563,0,Split delivery approved by customer planning team.
+1200056,13,F,68786.82,2025-12-01,3-MEDIUM,Clerk#000000690,0,Split delivery approved by customer planning team.
+1200057,5,P,29207.87,2025-12-20,2-HIGH,Clerk#000000064,0,Standard order created from forecast run.
+1200058,10,O,53538.84,2025-12-31,2-HIGH,Clerk#000000464,0,Standard order created from forecast run.
+1200059,15,F,17331.33,2025-12-15,3-MEDIUM,Clerk#000000286,0,Consolidated shipment requested for cost control.
+1200060,9,F,26637.30,2025-12-06,1-URGENT,Clerk#000000939,0,Split delivery approved by customer planning team.
+1200061,11,O,24819.55,2025-12-29,2-HIGH,Clerk#000000506,0,Routine replenishment for month-end demand.
+1200062,17,F,38957.35,2025-12-08,1-URGENT,Clerk#000000327,0,Expedite only if stockout risk materializes.
+1200063,1,F,10999.82,2025-12-11,3-MEDIUM,Clerk#000000238,0,Standard order created from forecast run.
+1200064,3,P,50140.07,2025-12-18,5-LOW,Clerk#000000046,0,Consolidated shipment requested for cost control.
+1200065,9,O,64979.70,2025-12-30,3-MEDIUM,Clerk#000000584,0,Consolidated shipment requested for cost control.
+1200066,11,F,50061.93,2025-12-08,2-HIGH,Clerk#000000035,0,Standard order created from forecast run.
+1200067,9,O,43487.98,2025-12-31,1-URGENT,Clerk#000000661,0,Order aligned with distribution center refill.
+1200068,20,P,61208.03,2025-12-21,1-URGENT,Clerk#000000221,0,Consolidated shipment requested for cost control.
+1200069,6,F,42145.45,2025-12-04,5-LOW,Clerk#000000633,0,Expedite only if stockout risk materializes.
+1200070,1,O,23191.49,2025-12-28,2-HIGH,Clerk#000000445,0,Routine replenishment for month-end demand.
+1200071,3,P,26235.44,2025-12-21,5-LOW,Clerk#000000170,0,Order aligned with distribution center refill.
+1200072,4,O,67389.81,2025-12-29,2-HIGH,Clerk#000000268,0,Order aligned with distribution center refill.
+1200073,2,P,10132.65,2025-12-19,5-LOW,Clerk#000000352,0,Order aligned with distribution center refill.
+1200074,2,F,49222.89,2025-12-11,1-URGENT,Clerk#000000726,0,Split delivery approved by customer planning team.
+1200075,17,P,15487.81,2025-12-22,5-LOW,Clerk#000000374,0,Split delivery approved by customer planning team.
+1200076,8,O,29218.87,2025-12-30,1-URGENT,Clerk#000000133,0,Expedite only if stockout risk materializes.
+1200077,11,F,48340.41,2025-12-02,5-LOW,Clerk#000000861,0,Routine replenishment for month-end demand.
+1200078,7,P,32815.12,2025-12-21,4-NOT SPECIFIED,Clerk#000000208,0,Expedite only if stockout risk materializes.
+1200079,5,O,35672.01,2025-12-27,1-URGENT,Clerk#000000193,0,Standard order created from forecast run.
+1200080,19,O,23675.64,2025-12-26,4-NOT SPECIFIED,Clerk#000000512,0,Order aligned with distribution center refill.
+1200081,14,P,14313.48,2025-12-22,3-MEDIUM,Clerk#000000115,0,Order aligned with distribution center refill.
+1200082,14,F,57568.58,2025-12-04,4-NOT SPECIFIED,Clerk#000000821,0,Order aligned with distribution center refill.
+1200083,8,P,69626.53,2025-12-24,4-NOT SPECIFIED,Clerk#000000747,0,Split delivery approved by customer planning team.
+1200084,19,P,25662.89,2025-12-25,4-NOT SPECIFIED,Clerk#000000655,0,Routine replenishment for month-end demand.
+1200085,16,F,71252.05,2025-12-14,5-LOW,Clerk#000000117,0,Routine replenishment for month-end demand.
+1200086,14,P,16745.00,2025-12-20,3-MEDIUM,Clerk#000000407,0,Split delivery approved by customer planning team.
+1200087,12,F,54464.05,2025-12-03,5-LOW,Clerk#000000337,0,Consolidated shipment requested for cost control.
+1200088,13,P,35377.68,2025-12-17,3-MEDIUM,Clerk#000000068,0,Consolidated shipment requested for cost control.
+1200089,1,P,15313.02,2025-12-23,5-LOW,Clerk#000000454,0,Split delivery approved by customer planning team.
+1200090,16,P,31367.78,2025-12-23,5-LOW,Clerk#000000856,0,Order aligned with distribution center refill.
+1200091,5,F,22053.59,2025-12-06,4-NOT SPECIFIED,Clerk#000000382,0,Consolidated shipment requested for cost control.
+1200092,4,P,8424.92,2025-12-16,1-URGENT,Clerk#000000568,0,Routine replenishment for month-end demand.
+1200093,17,P,46228.44,2025-12-15,4-NOT SPECIFIED,Clerk#000000391,0,Consolidated shipment requested for cost control.
+1200094,17,P,44615.05,2025-12-16,3-MEDIUM,Clerk#000000486,0,Standard order created from forecast run.
+1200095,10,P,40876.80,2025-12-17,3-MEDIUM,Clerk#000000406,0,Order aligned with distribution center refill.
+1200096,20,P,40530.15,2025-12-25,4-NOT SPECIFIED,Clerk#000000370,0,Order aligned with distribution center refill.
+1200097,7,F,27311.18,2025-12-13,3-MEDIUM,Clerk#000000046,0,Standard order created from forecast run.
+1200098,12,F,27446.62,2025-12-09,4-NOT SPECIFIED,Clerk#000000310,0,Order aligned with distribution center refill.
+1200099,15,P,14103.35,2025-12-21,2-HIGH,Clerk#000000944,0,Split delivery approved by customer planning team.
+1200100,11,F,70892.60,2025-12-01,4-NOT SPECIFIED,Clerk#000000482,0,Expedite only if stockout risk materializes.

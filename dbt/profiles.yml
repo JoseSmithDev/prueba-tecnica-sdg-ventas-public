@@ -1,0 +1,26 @@
+# Conexión a Snowflake sin credenciales hardcodeadas — todo viene de variables de entorno (.env)
+# database = SILVER: es donde vive por defecto todo lo que dbt escribe (staging + Data Vault).
+# El grupo mart la sobreescribe a GOLD vía +database en dbt_project.yml.
+ventas:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SF_ACCOUNT') }}"
+      user: "{{ env_var('SF_USER') }}"
+      password: "{{ env_var('SF_PASSWORD') }}"
+      role: "{{ env_var('SF_ROLE', 'ROLE_VENTAS_TRANSFORMER_FR') }}"
+      database: "{{ env_var('SF_DATABASE', 'SILVER') }}"
+      warehouse: "{{ env_var('SF_WAREHOUSE', 'WH_VENTAS_DBT_XS') }}"
+      schema: STAGING
+      # threads: 1, no 4 — con automate_dv, dos modelos que comparten el
+      # mismo source_model (p.ej. lnk_part_supplier y sat_part_supplier, ambos
+      # de vw_stg_partsupp) no tienen ref() entre sí, así que dbt los corre en
+      # paralelo. Un test relationships entre ambos puede lanzarse antes de
+      # que el otro modelo haya comprometido sus filas de esta carga (carrera
+      # real, observada en vivo con 202601: "Got 12 results" en el test de
+      # sat_part_supplier -> lnk_part_supplier, resuelto solo al re-consultar
+      # unos segundos después). threads: 1 fuerza orden secuencial y elimina
+      # la carrera; el coste de paralelismo es irrelevante en un proyecto de
+      # 44 modelos (~20s de build).
+      threads: 1

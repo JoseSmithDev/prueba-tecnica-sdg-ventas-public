@@ -1,0 +1,29 @@
+entity: customer
+enabled: true
+source:
+  pattern: "{source_root}/customer.csv"
+target:
+  database: BRONZE
+  schema: LANDING
+  table: TB_CUSTOMER
+  load_type: full
+columns:
+  - {name: c_custkey,    type: NUMBER}
+  - {name: c_name,       type: STRING}
+  - {name: c_address,    type: STRING}
+  - {name: c_nationkey,  type: NUMBER}
+  - {name: c_phone,      type: STRING}
+  - {name: c_acctbal,    type: "NUMBER(12,2)"}
+  - {name: c_mktsegment, type: STRING}
+  - {name: c_comment,    type: STRING}
+data_vault:
+  hub: hub_customer
+  business_key: [c_custkey]
+  hashdiff_exclude: []
+  links:
+    - name: lnk_customer_nation
+      columns: [c_custkey, c_nationkey]
+orchestration:
+  dag_group: ventas_monthly
+  depends_on: [nation]
+  ingest_priority: 30

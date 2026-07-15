@@ -1,0 +1,25 @@
+entity: nation
+enabled: true
+source:
+  pattern: "{source_root}/nation.csv"
+target:
+  database: BRONZE
+  schema: LANDING
+  table: TB_NATION
+  load_type: full
+columns:
+  - {name: n_nationkey, type: NUMBER}
+  - {name: n_name,      type: STRING}
+  - {name: n_regionkey, type: NUMBER}
+  - {name: n_comment,   type: STRING}
+data_vault:
+  hub: hub_nation
+  business_key: [n_nationkey]
+  hashdiff_exclude: []
+  links:
+    - name: lnk_nation_region
+      columns: [n_nationkey, n_regionkey]
+orchestration:
+  dag_group: ventas_monthly
+  depends_on: [region]
+  ingest_priority: 20

@@ -1,0 +1,18 @@
+defaults:
+  source_root: "data/{load_id}_sample"
+  bronze_database: BRONZE
+  bronze_schema: LANDING
+  stage: STG_VENTAS_CSV
+  file_format: FF_VENTAS_CSV_HEADER
+  record_source: VENTAS_CSV
+  load_type: full
+  audit_database: META
+  audit_schema: CONTROL
+  audit_table: TB_VENTAS_LOAD_AUDIT
+
+dag_groups:
+  ventas_monthly:
+    schedule: null              # manual, se lanza a mano pasando load_id
+    default_load_id: "202512"
+    dbt_layers: [raw, staging, raw_vault, mart]
+    run_tests: true

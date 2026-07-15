@@ -1,0 +1,5 @@
+r_regionkey,r_name,r_comment
+0,EUROPE,European commercial zone for synthetic TPCH sample
+1,AMERICA,American commercial zone for synthetic TPCH sample
+2,ASIA,Asian commercial zone for synthetic TPCH sample
+3,AFRICA,African commercial zone for synthetic TPCH sample

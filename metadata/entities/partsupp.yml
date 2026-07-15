@@ -1,0 +1,25 @@
+entity: partsupp
+enabled: true
+source:
+  pattern: "{source_root}/partsupp.csv"
+target:
+  database: BRONZE
+  schema: LANDING
+  table: TB_PARTSUPP
+  load_type: full
+columns:
+  - {name: ps_partkey,    type: NUMBER}
+  - {name: ps_suppkey,    type: NUMBER}
+  - {name: ps_availqty,   type: NUMBER}
+  - {name: ps_supplycost, type: "NUMBER(12,2)"}
+  - {name: ps_comment,    type: STRING}
+data_vault:
+  # Entidad débil: partsupp no tiene identidad propia fuera de la pareja
+  # (part, supplier) — es un link puro con satélite, no un hub.
+  link: lnk_part_supplier
+  link_columns: [ps_partkey, ps_suppkey]
+  hashdiff_exclude: []
+orchestration:
+  dag_group: ventas_monthly
+  depends_on: [part, supplier]
+  ingest_priority: 40

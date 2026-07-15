@@ -1,0 +1,21 @@
+entity: region
+enabled: true
+source:
+  pattern: "{source_root}/region.csv"
+target:
+  database: BRONZE
+  schema: LANDING
+  table: TB_REGION
+  load_type: full
+columns:
+  - {name: r_regionkey, type: NUMBER}
+  - {name: r_name,      type: STRING}
+  - {name: r_comment,   type: STRING}
+data_vault:
+  hub: hub_region
+  business_key: [r_regionkey]
+  hashdiff_exclude: []
+orchestration:
+  dag_group: ventas_monthly
+  depends_on: []
+  ingest_priority: 10

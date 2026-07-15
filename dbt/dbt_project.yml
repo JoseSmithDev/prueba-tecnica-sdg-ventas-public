@@ -1,0 +1,41 @@
+name: 'ventas'
+version: '1.0.0'
+config-version: 2
+
+profile: 'ventas'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+vars:
+  # Default inofensivo: sin --vars, ningún filtro de load_id casa y no se procesa nada por accidente.
+  load_id: "000000"
+
+models:
+  ventas:
+    raw:
+      +materialized: view
+      +schema: STAGING              # vive en SILVER.STAGING (default database del profile)
+      +tags: ["raw"]
+    staging:
+      +materialized: view
+      +schema: STAGING              # SILVER.STAGING
+      +tags: ["staging"]
+    raw_vault:
+      +materialized: incremental
+      +schema: VAULT                # SILVER.VAULT — Data Vault 2.0, naming estándar sin tocar
+      +transient: false             # sistema de registro: necesita Fail-safe, no solo Time Travel
+      +tags: ["raw_vault"]
+    mart:
+      +materialized: table
+      +database: GOLD               # única capa que vive en OTRA base de datos
+      +schema: MART                 # GOLD.MART
+      +transient: false             # capa de consumo de negocio: mismo nivel de protección que SILVER
+      +tags: ["mart"]

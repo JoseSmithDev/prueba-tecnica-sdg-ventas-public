@@ -1,0 +1,39 @@
+entity: lineitem
+enabled: true
+source:
+  pattern: "{source_root}/lineitem.csv"
+target:
+  database: BRONZE
+  schema: LANDING
+  table: TB_LINEITEM
+  load_type: append
+columns:
+  - {name: l_orderkey,      type: NUMBER}
+  - {name: l_partkey,       type: NUMBER}
+  - {name: l_suppkey,       type: NUMBER}
+  - {name: l_linenumber,    type: NUMBER}
+  - {name: l_quantity,      type: "NUMBER(12,2)"}
+  - {name: l_extendedprice, type: "NUMBER(12,2)"}
+  - {name: l_discount,      type: "NUMBER(5,2)"}
+  - {name: l_tax,           type: "NUMBER(5,2)"}
+  - {name: l_returnflag,    type: STRING}
+  - {name: l_linestatus,    type: STRING}
+  - {name: l_shipdate,      type: DATE}
+  - {name: l_commitdate,    type: DATE}
+  - {name: l_receiptdate,   type: DATE}
+  - {name: l_shipinstruct,  type: STRING}
+  - {name: l_shipmode,      type: STRING}
+  - {name: l_comment,       type: STRING}
+data_vault:
+  # Entidad débil: una línea de pedido no existe fuera de su pedido — no
+  # tiene hub propio. Es un link entre order/part/supplier, con l_linenumber
+  # como dependent child key (distingue líneas dentro del mismo pedido, no
+  # es una business key de negocio real).
+  link: lnk_lineitem
+  link_columns: [l_orderkey, l_partkey, l_suppkey, l_linenumber]
+  dependent_child: [l_linenumber]
+  hashdiff_exclude: []
+orchestration:
+  dag_group: ventas_monthly
+  depends_on: [orders, part, supplier]
+  ingest_priority: 50

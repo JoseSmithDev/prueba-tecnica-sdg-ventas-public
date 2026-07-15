@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: tb_dim_customer
+    columns:
+      - name: id_customer
+        tests: [not_null]
+  - name: tb_dim_supplier
+    columns:
+      - name: id_supplier
+        tests: [unique, not_null]
+  - name: tb_dim_part
+    columns:
+      - name: id_part
+        tests: [unique, not_null]
+  - name: tb_dim_date
+    columns:
+      - name: id_date
+        tests: [unique, not_null]
+  - name: tb_fct_order_line
+    columns:
+      - name: id_order_line
+        tests: [unique, not_null]
+      - name: fk_customer
+        tests:
+          - relationships:
+              arguments: {to: ref('tb_dim_customer'), field: id_customer}
+      - name: fk_supplier
+        tests:
+          - relationships:
+              arguments: {to: ref('tb_dim_supplier'), field: id_supplier}
+      - name: fk_part
+        tests:
+          - relationships:
+              arguments: {to: ref('tb_dim_part'), field: id_part}
+      - name: fk_order_date
+        tests:
+          - relationships:
+              arguments: {to: ref('tb_dim_date'), field: id_date}
+      - name: fk_ship_date
+        tests:
+          - relationships:
+              arguments: {to: ref('tb_dim_date'), field: id_date}

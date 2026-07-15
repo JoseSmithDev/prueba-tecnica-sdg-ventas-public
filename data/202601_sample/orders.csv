@@ -1,0 +1,111 @@
+o_orderkey,o_custkey,o_orderstatus,o_totalprice,o_orderdate,o_orderpriority,o_clerk,o_shippriority,o_comment
+1300001,16,F,27311.85,2026-01-15,4-NOT SPECIFIED,Clerk#000000791,0,Consolidated shipment requested to reduce handling cost.
+1300002,21,P,21703.38,2026-01-30,2-HIGH,Clerk#000000789,0,Customer requested phased delivery for warehouse balancing.
+1300003,12,P,22106.46,2026-01-30,4-NOT SPECIFIED,Clerk#000000524,0,Planned purchase released after annual budget reset.
+1300004,2,P,41066.06,2026-01-23,5-LOW,Clerk#000000529,0,Planned purchase released after annual budget reset.
+1300005,11,F,46919.45,2026-01-11,3-MEDIUM,Clerk#000000992,0,Consolidated shipment requested to reduce handling cost.
+1300006,12,P,37916.93,2026-01-22,5-LOW,Clerk#000000251,0,Cross-border order aligned with start-of-year stocking plan.
+1300007,8,F,47038.03,2026-01-17,3-MEDIUM,Clerk#000000490,0,Planned purchase released after annual budget reset.
+1300008,11,F,19823.13,2026-01-11,2-HIGH,Clerk#000000358,0,Planned purchase released after annual budget reset.
+1300009,22,P,47730.34,2026-01-24,2-HIGH,Clerk#000000489,0,Consolidated shipment requested to reduce handling cost.
+1300010,5,F,22165.84,2026-01-04,4-NOT SPECIFIED,Clerk#000000255,0,Planned purchase released after annual budget reset.
+1300011,3,O,53455.93,2026-01-31,1-URGENT,Clerk#000000648,0,Routine replenishment scheduled for January demand planning.
+1300012,18,F,27289.46,2026-01-13,4-NOT SPECIFIED,Clerk#000000953,0,Consolidated shipment requested to reduce handling cost.
+1300013,12,P,39995.08,2026-01-30,1-URGENT,Clerk#000000758,0,Planned purchase released after annual budget reset.
+1300014,15,O,17803.81,2026-01-25,1-URGENT,Clerk#000000029,0,Planned purchase released after annual budget reset.
+1300015,20,P,35918.37,2026-01-27,4-NOT SPECIFIED,Clerk#000000404,0,Routine replenishment scheduled for January demand planning.
+1300016,20,O,40426.59,2026-01-25,4-NOT SPECIFIED,Clerk#000000641,0,Cross-border order aligned with start-of-year stocking plan.
+1300017,22,F,29238.1,2026-01-15,3-MEDIUM,Clerk#000000131,0,Routine replenishment scheduled for January demand planning.
+1300018,14,O,41598.07,2026-01-28,2-HIGH,Clerk#000000386,0,Cross-border order aligned with start-of-year stocking plan.
+1300019,17,F,40141.68,2026-01-11,3-MEDIUM,Clerk#000000978,0,Planned purchase released after annual budget reset.
+1300020,20,F,23231.68,2026-01-13,2-HIGH,Clerk#000000525,0,Cross-border order aligned with start-of-year stocking plan.
+1300021,8,F,23092.08,2026-01-08,2-HIGH,Clerk#000000625,0,Customer requested phased delivery for warehouse balancing.
+1300022,18,F,37183.19,2026-01-06,2-HIGH,Clerk#000000586,0,Routine replenishment scheduled for January demand planning.
+1300023,2,O,73525.25,2026-01-31,2-HIGH,Clerk#000000390,0,Planned purchase released after annual budget reset.
+1300024,20,F,5916.48,2026-01-12,3-MEDIUM,Clerk#000000006,0,Routine replenishment scheduled for January demand planning.
+1300025,4,F,18790.23,2026-01-02,2-HIGH,Clerk#000000562,0,Backlog cleared into January production and replenishment cycle.
+1300026,17,F,40988.68,2026-01-13,1-URGENT,Clerk#000000172,0,Backlog cleared into January production and replenishment cycle.
+1300027,11,F,29772.52,2026-01-17,2-HIGH,Clerk#000000014,0,Backlog cleared into January production and replenishment cycle.
+1300028,19,F,34164.27,2026-01-07,2-HIGH,Clerk#000000433,0,Planned purchase released after annual budget reset.
+1300029,11,F,26745.14,2026-01-05,1-URGENT,Clerk#000000883,0,Routine replenishment scheduled for January demand planning.
+1300030,15,P,24444.81,2026-01-20,1-URGENT,Clerk#000000012,0,Routine replenishment scheduled for January demand planning.
+1300031,1,P,44254.23,2026-01-27,1-URGENT,Clerk#000000638,0,Planned purchase released after annual budget reset.
+1300032,9,F,35567.04,2026-01-03,3-MEDIUM,Clerk#000000794,0,Routine replenishment scheduled for January demand planning.
+1300033,11,F,19824.58,2026-01-05,3-MEDIUM,Clerk#000000927,0,Routine replenishment scheduled for January demand planning.
+1300034,19,O,18613.4,2026-01-25,4-NOT SPECIFIED,Clerk#000000846,0,Customer requested phased delivery for warehouse balancing.
+1300035,18,O,77935.07,2026-01-30,4-NOT SPECIFIED,Clerk#000000326,0,Cross-border order aligned with start-of-year stocking plan.
+1300036,1,F,23467.68,2026-01-12,2-HIGH,Clerk#000000633,0,Customer requested phased delivery for warehouse balancing.
+1300037,4,O,19482.02,2026-01-26,1-URGENT,Clerk#000000855,0,Cross-border order aligned with start-of-year stocking plan.
+1300038,13,P,15610.39,2026-01-28,4-NOT SPECIFIED,Clerk#000000521,0,Backlog cleared into January production and replenishment cycle.
+1300039,12,P,30353.85,2026-01-31,2-HIGH,Clerk#000000298,0,Planned purchase released after annual budget reset.
+1300040,1,P,44210.57,2026-01-24,5-LOW,Clerk#000000454,0,Customer requested phased delivery for warehouse balancing.
+1300041,10,P,64043.48,2026-01-31,5-LOW,Clerk#000000691,0,Planned purchase released after annual budget reset.
+1300042,8,F,35752.6,2026-01-04,3-MEDIUM,Clerk#000000309,0,Customer requested phased delivery for warehouse balancing.
+1300043,10,F,31347.47,2026-01-18,1-URGENT,Clerk#000000113,0,Customer requested phased delivery for warehouse balancing.
+1300044,3,P,30075.13,2026-01-26,4-NOT SPECIFIED,Clerk#000000735,0,Routine replenishment scheduled for January demand planning.
+1300045,14,F,30802.06,2026-01-23,3-MEDIUM,Clerk#000000912,0,Consolidated shipment requested to reduce handling cost.
+1300046,4,P,31403.81,2026-01-26,1-URGENT,Clerk#000000533,0,Cross-border order aligned with start-of-year stocking plan.
+1300047,6,P,44970.54,2026-01-20,1-URGENT,Clerk#000000241,0,Planned purchase released after annual budget reset.
+1300048,15,P,19868.66,2026-01-21,3-MEDIUM,Clerk#000000564,0,Planned purchase released after annual budget reset.
+1300049,2,P,38791.58,2026-01-28,4-NOT SPECIFIED,Clerk#000000123,0,Customer requested phased delivery for warehouse balancing.
+1300050,5,F,32267.56,2026-01-12,2-HIGH,Clerk#000000448,0,Planned purchase released after annual budget reset.
+1300051,1,O,29341.49,2026-01-25,1-URGENT,Clerk#000000744,0,Backlog cleared into January production and replenishment cycle.
+1300052,19,P,64251.55,2026-01-23,1-URGENT,Clerk#000000140,0,Cross-border order aligned with start-of-year stocking plan.
+1300053,18,P,34108.68,2026-01-24,3-MEDIUM,Clerk#000000857,0,Planned purchase released after annual budget reset.
+1300054,2,P,20580.94,2026-01-31,5-LOW,Clerk#000000369,0,Customer requested phased delivery for warehouse balancing.
+1300055,21,P,21080.3,2026-01-31,1-URGENT,Clerk#000000997,0,Routine replenishment scheduled for January demand planning.
+1300056,12,O,33480.66,2026-01-31,5-LOW,Clerk#000000480,0,Cross-border order aligned with start-of-year stocking plan.
+1300057,7,F,41302.98,2026-01-16,2-HIGH,Clerk#000000107,0,Routine replenishment scheduled for January demand planning.
+1300058,14,P,34950.75,2026-01-20,1-URGENT,Clerk#000000424,0,Cross-border order aligned with start-of-year stocking plan.
+1300059,11,P,25577.18,2026-01-19,4-NOT SPECIFIED,Clerk#000000492,0,Cross-border order aligned with start-of-year stocking plan.
+1300060,18,P,9688.99,2026-01-27,1-URGENT,Clerk#000000871,0,Routine replenishment scheduled for January demand planning.
+1300061,3,F,48679.47,2026-01-04,3-MEDIUM,Clerk#000000903,0,Planned purchase released after annual budget reset.
+1300062,8,O,19838.67,2026-01-26,5-LOW,Clerk#000000039,0,Planned purchase released after annual budget reset.
+1300063,17,P,26902.47,2026-01-26,1-URGENT,Clerk#000000865,0,Customer requested phased delivery for warehouse balancing.
+1300064,16,F,24329.09,2026-01-15,2-HIGH,Clerk#000000393,0,Consolidated shipment requested to reduce handling cost.
+1300065,14,P,47062.99,2026-01-21,3-MEDIUM,Clerk#000000881,0,Routine replenishment scheduled for January demand planning.
+1300066,5,F,39381.57,2026-01-17,2-HIGH,Clerk#000000668,0,Consolidated shipment requested to reduce handling cost.
+1300067,6,F,69950.15,2026-01-13,5-LOW,Clerk#000000278,0,Consolidated shipment requested to reduce handling cost.
+1300068,7,F,12166.59,2026-01-18,3-MEDIUM,Clerk#000000631,0,Planned purchase released after annual budget reset.
+1300069,15,P,46666.09,2026-01-23,2-HIGH,Clerk#000000046,0,Consolidated shipment requested to reduce handling cost.
+1300070,2,P,18101.51,2026-01-23,4-NOT SPECIFIED,Clerk#000000486,0,Backlog cleared into January production and replenishment cycle.
+1300071,22,F,39032.47,2026-01-07,2-HIGH,Clerk#000000621,0,Cross-border order aligned with start-of-year stocking plan.
+1300072,11,F,27530.8,2026-01-03,1-URGENT,Clerk#000000338,0,Consolidated shipment requested to reduce handling cost.
+1300073,10,F,62740.14,2026-01-11,4-NOT SPECIFIED,Clerk#000000536,0,Routine replenishment scheduled for January demand planning.
+1300074,13,F,44191.67,2026-01-11,2-HIGH,Clerk#000000367,0,Customer requested phased delivery for warehouse balancing.
+1300075,8,O,5332.51,2026-01-29,4-NOT SPECIFIED,Clerk#000000939,0,Consolidated shipment requested to reduce handling cost.
+1300076,21,F,15823.82,2026-01-13,3-MEDIUM,Clerk#000000041,0,Customer requested phased delivery for warehouse balancing.
+1300077,9,F,21350.47,2026-01-21,5-LOW,Clerk#000000915,0,Backlog cleared into January production and replenishment cycle.
+1300078,13,O,60357.09,2026-01-26,3-MEDIUM,Clerk#000000801,0,Cross-border order aligned with start-of-year stocking plan.
+1300079,6,P,28422.04,2026-01-29,1-URGENT,Clerk#000000716,0,Backlog cleared into January production and replenishment cycle.
+1300080,17,F,38054.38,2026-01-14,2-HIGH,Clerk#000000202,0,Customer requested phased delivery for warehouse balancing.
+1300081,19,O,37594.92,2026-01-31,3-MEDIUM,Clerk#000000776,0,Customer requested phased delivery for warehouse balancing.
+1300082,5,P,29250.78,2026-01-25,5-LOW,Clerk#000000305,0,Consolidated shipment requested to reduce handling cost.
+1300083,12,P,26220.4,2026-01-22,2-HIGH,Clerk#000000635,0,Consolidated shipment requested to reduce handling cost.
+1300084,5,P,17472.17,2026-01-26,2-HIGH,Clerk#000000181,0,Routine replenishment scheduled for January demand planning.
+1300085,22,P,51019.64,2026-01-24,4-NOT SPECIFIED,Clerk#000000221,0,Routine replenishment scheduled for January demand planning.
+1300086,18,P,23772.17,2026-01-26,4-NOT SPECIFIED,Clerk#000000284,0,Backlog cleared into January production and replenishment cycle.
+1300087,16,F,21190.85,2026-01-14,5-LOW,Clerk#000000290,0,Planned purchase released after annual budget reset.
+1300088,16,F,33486.45,2026-01-13,5-LOW,Clerk#000000687,0,Customer requested phased delivery for warehouse balancing.
+1300089,1,F,24484.26,2026-01-14,1-URGENT,Clerk#000000412,0,Backlog cleared into January production and replenishment cycle.
+1300090,1,P,43404.58,2026-01-28,1-URGENT,Clerk#000000831,0,Customer requested phased delivery for warehouse balancing.
+1300091,5,O,34334.99,2026-01-27,2-HIGH,Clerk#000000587,0,Routine replenishment scheduled for January demand planning.
+1300092,15,P,17118.58,2026-01-29,3-MEDIUM,Clerk#000000173,0,Consolidated shipment requested to reduce handling cost.
+1300093,20,F,59154.73,2026-01-16,4-NOT SPECIFIED,Clerk#000000399,0,Backlog cleared into January production and replenishment cycle.
+1300094,21,O,34426.76,2026-01-29,3-MEDIUM,Clerk#000000717,0,Backlog cleared into January production and replenishment cycle.
+1300095,2,P,35353.6,2026-01-25,4-NOT SPECIFIED,Clerk#000000706,0,Backlog cleared into January production and replenishment cycle.
+1300096,6,F,41749.13,2026-01-11,1-URGENT,Clerk#000000852,0,Cross-border order aligned with start-of-year stocking plan.
+1300097,17,F,24269.19,2026-01-03,3-MEDIUM,Clerk#000000244,0,Cross-border order aligned with start-of-year stocking plan.
+1300098,15,P,32647.31,2026-01-26,3-MEDIUM,Clerk#000000520,0,Consolidated shipment requested to reduce handling cost.
+1300099,9,F,32730.19,2026-01-02,3-MEDIUM,Clerk#000000967,0,Consolidated shipment requested to reduce handling cost.
+1300100,9,F,60946.65,2026-01-13,2-HIGH,Clerk#000000112,0,Customer requested phased delivery for warehouse balancing.
+1300101,22,O,50732.39,2026-01-28,2-HIGH,Clerk#000000475,0,Consolidated shipment requested to reduce handling cost.
+1300102,13,P,43065.43,2026-01-27,5-LOW,Clerk#000000028,0,Routine replenishment scheduled for January demand planning.
+1300103,22,F,43078.16,2026-01-02,5-LOW,Clerk#000000501,0,Customer requested phased delivery for warehouse balancing.
+1300104,15,F,17526.39,2026-01-09,4-NOT SPECIFIED,Clerk#000000297,0,Planned purchase released after annual budget reset.
+1300105,5,P,12942.13,2026-01-22,1-URGENT,Clerk#000000770,0,Consolidated shipment requested to reduce handling cost.
+1300106,5,P,10072.31,2026-01-27,2-HIGH,Clerk#000000508,0,Routine replenishment scheduled for January demand planning.
+1300107,2,P,28295.59,2026-01-28,4-NOT SPECIFIED,Clerk#000000500,0,Customer requested phased delivery for warehouse balancing.
+1300108,18,P,18915.04,2026-01-29,1-URGENT,Clerk#000000756,0,Consolidated shipment requested to reduce handling cost.
+1300109,19,P,22233.98,2026-01-22,4-NOT SPECIFIED,Clerk#000000511,0,Customer requested phased delivery for warehouse balancing.
+1300110,8,F,31365.45,2026-01-05,1-URGENT,Clerk#000000593,0,Consolidated shipment requested to reduce handling cost.

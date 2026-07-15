@@ -1,0 +1,30 @@
+entity: orders
+enabled: true
+source:
+  pattern: "{source_root}/orders.csv"
+target:
+  database: BRONZE
+  schema: LANDING
+  table: TB_ORDERS
+  load_type: append
+columns:
+  - {name: o_orderkey,     type: NUMBER}
+  - {name: o_custkey,      type: NUMBER}
+  - {name: o_orderstatus,  type: STRING}
+  - {name: o_totalprice,   type: "NUMBER(12,2)"}
+  - {name: o_orderdate,    type: DATE}
+  - {name: o_orderpriority, type: STRING}
+  - {name: o_clerk,        type: STRING}
+  - {name: o_shippriority, type: NUMBER}
+  - {name: o_comment,      type: STRING}
+data_vault:
+  hub: hub_order
+  business_key: [o_orderkey]
+  hashdiff_exclude: []
+  links:
+    - name: lnk_order_customer
+      columns: [o_orderkey, o_custkey]
+orchestration:
+  dag_group: ventas_monthly
+  depends_on: [customer]
+  ingest_priority: 40

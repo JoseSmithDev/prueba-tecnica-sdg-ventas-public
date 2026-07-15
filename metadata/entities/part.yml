@@ -1,0 +1,27 @@
+entity: part
+enabled: true
+source:
+  pattern: "{source_root}/part.csv"
+target:
+  database: BRONZE
+  schema: LANDING
+  table: TB_PART
+  load_type: full
+columns:
+  - {name: p_partkey,     type: NUMBER}
+  - {name: p_name,        type: STRING}
+  - {name: p_mfgr,        type: STRING}
+  - {name: p_brand,       type: STRING}
+  - {name: p_type,        type: STRING}
+  - {name: p_size,        type: NUMBER}
+  - {name: p_container,   type: STRING}
+  - {name: p_retailprice, type: "NUMBER(12,2)"}
+  - {name: p_comment,     type: STRING}
+data_vault:
+  hub: hub_part
+  business_key: [p_partkey]
+  hashdiff_exclude: []
+orchestration:
+  dag_group: ventas_monthly
+  depends_on: []
+  ingest_priority: 10

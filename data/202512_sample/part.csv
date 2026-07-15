@@ -1,0 +1,41 @@
+p_partkey,p_name,p_mfgr,p_brand,p_type,p_size,p_container,p_retailprice,p_comment
+1,black gasket,Manufacturer#4,Brand#22,MEDIUM BRUSHED BRASS,23,LG BOX,478.76,Catalog part for schedu
+2,silver sensor,Manufacturer#2,Brand#11,STANDARD INDUSTRIAL NICKEL,7,BAG,329.11,Catalog part for schedu
+3,navy seal,Manufacturer#2,Brand#41,LARGE PLATED COPPER,26,PALLET,78.25,Catalog part for schedu
+4,blue seal,Manufacturer#4,Brand#51,STANDARD INDUSTRIAL NICKEL,15,MED PACK,311.21,Catalog part for schedu
+5,red hinge,Manufacturer#3,Brand#11,PROMO RUBBER COMPOSITE,38,BAG,234.77,Catalog part for schedu
+6,red pump,Manufacturer#3,Brand#22,STANDARD INDUSTRIAL NICKEL,7,SM BOX,137.54,Catalog part for schedu
+7,orange bolt,Manufacturer#4,Brand#12,LARGE PLATED COPPER,23,BAG,212.52,Catalog part for schedu
+8,blue hinge,Manufacturer#1,Brand#21,SMALL ANODIZED STEEL,1,JUMBO PKG,917.80,Catalog part for schedu
+9,black cable,Manufacturer#1,Brand#11,STANDARD INDUSTRIAL NICKEL,26,MED PACK,467.04,Catalog part for schedu
+10,golden controller,Manufacturer#1,Brand#52,HEAVY DUTY ALLOY,36,DRUM,228.51,Catalog part for schedu
+11,orange panel,Manufacturer#2,Brand#11,SMALL ANODIZED STEEL,6,LG BOX,727.08,Catalog part for schedu
+12,white sensor,Manufacturer#5,Brand#22,PRECISION ELECTRONIC UNIT,36,PALLET,536.02,Catalog part for schedu
+13,golden motor,Manufacturer#5,Brand#32,SMALL ANODIZED STEEL,2,PALLET,900.29,Catalog part for schedu
+14,black nozzle,Manufacturer#3,Brand#22,ECONOMY POLISHED TIN,21,LG BOX,536.56,Catalog part for schedu
+15,blue seal,Manufacturer#1,Brand#22,PROMO RUBBER COMPOSITE,39,WRAP CASE,475.07,Catalog part for schedu
+16,blue relay,Manufacturer#1,Brand#51,STANDARD INDUSTRIAL NICKEL,12,PALLET,586.45,Catalog part for schedu
+17,navy filter,Manufacturer#2,Brand#22,LARGE PLATED COPPER,45,MED PACK,412.23,Catalog part for schedu
+18,white adapter,Manufacturer#4,Brand#32,PROMO RUBBER COMPOSITE,34,DRUM,776.25,Catalog part for schedu
+19,silver motor,Manufacturer#5,Brand#41,LARGE PLATED COPPER,1,LG BOX,632.46,Catalog part for schedu
+20,blue bearing,Manufacturer#2,Brand#32,PRECISION ELECTRONIC UNIT,48,BAG,675.40,Catalog part for schedu
+21,gray bolt,Manufacturer#5,Brand#41,PROMO RUBBER COMPOSITE,4,JUMBO PKG,758.02,Catalog part for schedu
+22,blue switch,Manufacturer#2,Brand#51,HEAVY DUTY ALLOY,4,PALLET,187.26,Catalog part for schedu
+23,gray hinge,Manufacturer#5,Brand#21,SMALL ANODIZED STEEL,40,PALLET,390.01,Catalog part for schedu
+24,orange seal,Manufacturer#4,Brand#52,MEDIUM BRUSHED BRASS,20,BAG,353.75,Catalog part for schedu
+25,blue motor,Manufacturer#4,Brand#12,PROMO RUBBER COMPOSITE,30,SM BOX,228.81,Catalog part for schedu
+26,red sensor,Manufacturer#3,Brand#31,PRECISION ELECTRONIC UNIT,36,MED PACK,512.88,Catalog part for schedu
+27,black controller,Manufacturer#5,Brand#22,PROMO RUBBER COMPOSITE,49,MED PACK,533.77,Catalog part for schedu
+28,red gasket,Manufacturer#1,Brand#12,LARGE PLATED COPPER,29,DRUM,890.96,Catalog part for schedu
+29,navy valve,Manufacturer#1,Brand#11,SMALL ANODIZED STEEL,7,PALLET,391.99,Catalog part for schedu
+30,gray nozzle,Manufacturer#1,Brand#41,ECONOMY POLISHED TIN,32,DRUM,93.60,Catalog part for schedu
+31,blue controller,Manufacturer#4,Brand#51,PRECISION ELECTRONIC UNIT,49,JUMBO PKG,347.07,Catalog part for schedu
+32,silver switch,Manufacturer#1,Brand#11,ECONOMY POLISHED TIN,3,MED PACK,707.43,Catalog part for schedu
+33,golden bearing,Manufacturer#4,Brand#41,PRECISION ELECTRONIC UNIT,10,SM BOX,756.44,Catalog part for schedu
+34,orange nozzle,Manufacturer#3,Brand#42,LARGE PLATED COPPER,21,LG BOX,616.78,Catalog part for schedu
+35,blue valve,Manufacturer#1,Brand#22,ECONOMY POLISHED TIN,28,JUMBO PKG,866.10,Catalog part for schedu
+36,gray controller,Manufacturer#4,Brand#31,SMALL ANODIZED STEEL,2,LG BOX,27.53,Catalog part for schedu
+37,black hinge,Manufacturer#3,Brand#42,ECONOMY POLISHED TIN,7,DRUM,274.39,Catalog part for schedu
+38,orange pipe,Manufacturer#5,Brand#51,PRECISION ELECTRONIC UNIT,19,PALLET,61.74,Catalog part for schedu
+39,golden panel,Manufacturer#4,Brand#12,PROMO RUBBER COMPOSITE,25,DRUM,816.09,Catalog part for schedu
+40,blue controller,Manufacturer#5,Brand#12,HEAVY DUTY ALLOY,44,PALLET,914.93,Catalog part for schedu
